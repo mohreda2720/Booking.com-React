@@ -5,11 +5,12 @@ import Header from "../../components/header/Header";
 import { useLocation } from "react-router-dom";
 import { DateRange } from "react-date-range";
 import SearchItem from "../../components/searchItem/SearchItem";
+import { format } from "date-fns";
 
 const List = () => {
 
     const location = useLocation();
-    const [desnation, setDestnation] = useState(location.state.desnation)
+    const [desnation, setDestnation] = useState(location.state.destination)
     const [date, setDate] = useState(location.state.date)
     const [openDate, setOpenDate] = useState(false)
     const [options, setOptions] = useState(location.state.options)
