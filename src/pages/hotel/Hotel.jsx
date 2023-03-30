@@ -1,8 +1,8 @@
 import "./hotel.css";
-import Navbar from "../../components/navbar/Navbar";
-import Header from "../../components/header/Header";
-import MailList from "../../components/mailList/MailList";
-import Footer from "../../components/footer/Footer";
+// import Navbar from "../../components/navbar/Navbar";
+// import Header from "../../components/header/Header";
+// import MailList from "../../components/mailList/MailList";
+// import Footer from "../../components/footer/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 faCircleArrowLeft,
@@ -48,7 +48,7 @@ const handleMove = (direction) => {
     if (direction === "l") {
     newSlideNumber = slideNumber === 0 ? 5 : slideNumber - 1;
     } else {
-      newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1;
+    newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1;
     }
 
     setSlideNumber(newSlideNumber)
@@ -56,8 +56,8 @@ const handleMove = (direction) => {
 
 return (
     <div>
-    <Navbar />
-    <Header type="list" />
+    {/* <Navbar />
+    <Header type="list" /> */}
     <div className="hotelContainer">
         {open && (
         <div className="slider">
@@ -136,8 +136,8 @@ return (
             </div>
         </div>
         </div>
-        <MailList />
-        <Footer />
+        {/* <MailList />
+        <Footer /> */}
     </div>
     </div>
 );
