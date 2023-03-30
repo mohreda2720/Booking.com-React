@@ -11,33 +11,43 @@
     margin: 20px 0px 100px 0px;
 }
 
-.headerList{
+.headerList {
     display: flex;
     gap: 40px;
     margin-bottom: 40px;
 }
 
-.headerListItem{
+.headerListItem {
     display: flex;
     align-items: center;
     gap: 10px;
     cursor: pointer;
 }
-.headerListItem.active{
+
+.headerListItem.active {
     border: 1px solid white;
     border-radius: 20px;
     padding: 10px;
 }
 
-.headerDesc{
+.headerDesc {
     margin: 20px 0px;
 }
 
-.headerBtn{
+.headerBtn {
     background-color: #0071c2;
     color: white;
     font-weight: 500;
     border: none;
     padding: 10px;
     cursor: pointer;
+}
+
+.date {
+    z-index: 2;
+}
+
+.potions {
+    z-index: 2;
+
 }
