@@ -1,6 +1,6 @@
 import "./hotel.css";
-// import Navbar from "../../components/navbar/Navbar";
-// import Header from "../../components/header/Header";
+import Navbar from "../../components/navbar/Navbar";
+import Header from "../../components/header/Header";
 // import MailList from "../../components/mailList/MailList";
 // import Footer from "../../components/footer/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -56,8 +56,8 @@ const handleMove = (direction) => {
 
 return (
     <div>
-    {/* <Navbar />
-    <Header type="list" /> */}
+    <Navbar />
+    <Header type="list" />
     <div className="hotelContainer">
         {open && (
         <div className="slider">
