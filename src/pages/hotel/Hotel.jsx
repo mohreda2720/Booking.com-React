@@ -10,11 +10,27 @@ import {
     faCircleXmark,
     faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import sethotel from "../../store/actions/action";
+
 
 const Hotel = () => {
     const [slideNumber, setSlideNumber] = useState(0);
     const [open, setOpen] = useState(false);
+
+    const dispatch = useDispatch()
+ 
+    const [page, setPage] = useState(1)
+
+    const hotels = useSelector((state)=> state.gethotels)
+
+    useEffect(()=>{
+  
+  
+      dispatch( sethotel(page))
+  },)
 
     const photos = [
         {
@@ -55,7 +71,16 @@ const Hotel = () => {
     };
 
     return (
-        <div>
+       
+            <div>
+                
+            <div className="d-flex flex-wrap">
+                {hotels.map(function (allhotels) {
+                    return <div key={allhotels.name}>
+                        {allhotels.name}
+                        </div>
+                          })}
+            </div>
             <Navbar />
             <Header type="list" />
             <div className="hotelContainer">

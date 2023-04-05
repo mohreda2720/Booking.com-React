@@ -5,21 +5,24 @@
     justify-content: space-between;
     gap: 20px;
     z-index: 1;
+    border-radius: 50px 50px 50px 50px !important;
 }
 
 .featuredItem {
     position: relative;
     color: white;
-    border-radius: 10px;
+    border-radius: 50px 50px 50px 50px !important;
     overflow: hidden;
     height: 250px;
     flex: 1
+
 }
 
 .featuredImg {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 50px 50px 50px 50px !important;
 }
 
 .featuredTitles {
