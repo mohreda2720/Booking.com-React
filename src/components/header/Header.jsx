@@ -64,7 +64,7 @@ const Header = ({ type }) => {
               <Nav.Item className="headerListItem active">
                 <Nav.Link href="#">
                   <FontAwesomeIcon icon={faBed} />
-                  <br />
+                
                   <span style={{ color: "white" }}>Stays</span>
                 </Nav.Link>
               </Nav.Item>
