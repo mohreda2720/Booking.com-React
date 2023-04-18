@@ -64,7 +64,7 @@ const Header = ({ type }) => {
               <Nav.Item className="headerListItem active">
                 <Nav.Link href="#">
                   <FontAwesomeIcon icon={faBed} />
-                
+
                   <span style={{ color: "white" }}>Stays</span>
                 </Nav.Link>
               </Nav.Item>
@@ -112,6 +112,7 @@ const Header = ({ type }) => {
             <div className="headerSearch">
               <div className="headerSearchItem">
                 <FontAwesomeIcon icon={faBed} className="headerIcon" />
+
                 <input
                   type="text"
                   placeholder="Where are you going?"
@@ -119,6 +120,7 @@ const Header = ({ type }) => {
                   onChange={(e) => setDestination(e.target.value)}
                 />
               </div>
+
               <div className="headerSearchItem">
                 <FontAwesomeIcon icon={faCalendarDays} className="headerIcon" />
                 <span
