@@ -5,25 +5,24 @@ import {
   faPerson,
   faPlane,
   faTaxi,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "./header.css";
-import { DateRange } from "react-date-range";
-import { useState } from "react";
-import "react-date-range/dist/styles.css"; // main css file
-import "react-date-range/dist/theme/default.css"; // theme css file
-import { format } from "date-fns";
-import { useNavigate } from "react-router-dom";
-import { Navbar, Nav } from "react-bootstrap";
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import './header.css';
+import { DateRange } from 'react-date-range';
+import { useState } from 'react';
+import 'react-date-range/dist/styles.css'; // main css file
+import 'react-date-range/dist/theme/default.css'; // theme css file
+import { format } from 'date-fns';
+import { useNavigate } from 'react-router-dom';
 
 const Header = ({ type }) => {
-  const [destination, setDestination] = useState("");
+  const [destination, setDestination] = useState('');
   const [openDate, setOpenDate] = useState(false);
   const [date, setDate] = useState([
     {
       startDate: new Date(),
       endDate: new Date(),
-      key: "selection",
+      key: 'selection',
     },
   ]);
   const [openOptions, setOpenOptions] = useState(false);
@@ -39,67 +38,47 @@ const Header = ({ type }) => {
     setOptions((prev) => {
       return {
         ...prev,
-        [name]: operation === "i" ? options[name] + 1 : options[name] - 1,
+        [name]: operation === 'i' ? options[name] + 1 : options[name] - 1,
       };
     });
   };
 
   const handleSearch = () => {
-    navigate("/hotels", { state: { destination, date, options } });
+    navigate('/hotels', { state: { destination, date, options } });
   };
 
   return (
     <div className="header col-md-12">
       <div
         className={
-          type === "list"
-            ? "headerContainer mx-auto listMode"
-            : "headerContainer mx-auto"
+          type === 'list'
+            ? 'headerContainer mx-auto listMode'
+            : 'headerContainer mx-auto'
         }
       >
-        <Navbar expand="lg">
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="headerList">
-              <Nav.Item className="headerListItem active">
-                <Nav.Link href="#">
-                  <FontAwesomeIcon icon={faBed} />
-                
-                  <span style={{ color: "white" }}>Stays</span>
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item className="headerListItem">
-                <Nav.Link href="#">
-                  <FontAwesomeIcon icon={faPlane} />
-                  <br />
-                  <span style={{ color: "white" }}>Flights</span>
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item className="headerListItem">
-                <Nav.Link href="#">
-                  <FontAwesomeIcon icon={faCar} />
-                  <br />
-                  <span style={{ color: "white" }}>Car rentals</span>
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item className="headerListItem">
-                <Nav.Link href="#">
-                  <FontAwesomeIcon icon={faBed} />
-                  <br />
-                  <span style={{ color: "white" }}>Attractions</span>
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item className="headerListItem">
-                <Nav.Link href="#">
-                  <FontAwesomeIcon icon={faTaxi} />
-                  <br />
-                  <span style={{ color: "white" }}>Airport taxis</span>
-                </Nav.Link>
-              </Nav.Item>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
-        {type !== "list" && (
+        <div className="headerList">
+          <div className="headerListItem active">
+            <FontAwesomeIcon icon={faBed} />
+            <span>Stays</span>
+          </div>
+          <div className="headerListItem">
+            <FontAwesomeIcon icon={faPlane} />
+            <span>Flights</span>
+          </div>
+          <div className="headerListItem">
+            <FontAwesomeIcon icon={faCar} />
+            <span>Car rentals</span>
+          </div>
+          <div className="headerListItem">
+            <FontAwesomeIcon icon={faBed} />
+            <span>Attractions</span>
+          </div>
+          <div className="headerListItem">
+            <FontAwesomeIcon icon={faTaxi} />
+            <span>Airport taxis</span>
+          </div>
+        </div>
+        {type !== 'list' && (
           <>
             <h1 className="headerTitle">
               A lifetime of discounts? It's Genius.
@@ -124,9 +103,9 @@ const Header = ({ type }) => {
                 <span
                   onClick={() => setOpenDate(!openDate)}
                   className="headerSearchText"
-                >{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
+                >{`${format(date[0].startDate, 'MM/dd/yyyy')} to ${format(
                   date[0].endDate,
-                  "MM/dd/yyyy"
+                  'MM/dd/yyyy'
                 )}`}</span>
                 {openDate && (
                   <DateRange
@@ -153,7 +132,7 @@ const Header = ({ type }) => {
                         <button
                           disabled={options.adult <= 1}
                           className="optionCounterButton"
-                          onClick={() => handleOption("adult", "d")}
+                          onClick={() => handleOption('adult', 'd')}
                         >
                           -
                         </button>
@@ -162,7 +141,7 @@ const Header = ({ type }) => {
                         </span>
                         <button
                           className="optionCounterButton"
-                          onClick={() => handleOption("adult", "i")}
+                          onClick={() => handleOption('adult', 'i')}
                         >
                           +
                         </button>
@@ -174,7 +153,7 @@ const Header = ({ type }) => {
                         <button
                           disabled={options.children <= 0}
                           className="optionCounterButton"
-                          onClick={() => handleOption("children", "d")}
+                          onClick={() => handleOption('children', 'd')}
                         >
                           -
                         </button>
@@ -183,7 +162,7 @@ const Header = ({ type }) => {
                         </span>
                         <button
                           className="optionCounterButton"
-                          onClick={() => handleOption("children", "i")}
+                          onClick={() => handleOption('children', 'i')}
                         >
                           +
                         </button>
@@ -195,7 +174,7 @@ const Header = ({ type }) => {
                         <button
                           disabled={options.room <= 1}
                           className="optionCounterButton"
-                          onClick={() => handleOption("room", "d")}
+                          onClick={() => handleOption('room', 'd')}
                         >
                           -
                         </button>
@@ -204,7 +183,7 @@ const Header = ({ type }) => {
                         </span>
                         <button
                           className="optionCounterButton"
-                          onClick={() => handleOption("room", "i")}
+                          onClick={() => handleOption('room', 'i')}
                         >
                           +
                         </button>
