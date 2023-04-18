@@ -10,11 +10,46 @@ import {
     faCircleXmark,
     faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+
+import React, { useEffect, useState } from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import sethotel from "../../store/actions/action";
+import axiosConfig from './../../axiosConfig/axiosConfig';
+import { useParams } from "react-router-dom";
+
 
 const Hotel = () => {
+
+    const [hotels, sethotels] = useState([]);
+    const { id } = useParams()
+    // const urlToImage = "https://image.tmdb.org/t/p/w500/"
+
+
     const [slideNumber, setSlideNumber] = useState(0);
     const [open, setOpen] = useState(false);
+
+    // const dispatch = useDispatch()
+ 
+    // const [page, setPage] = useState(1)
+
+    // const hotels = useSelector((state)=> state.gethotels)
+
+    useEffect(()=>{
+  
+  
+    //   dispatch( sethotel(page))
+
+    axiosConfig.get(
+        `hotels/${id}`).then((res) => {
+            console.log((res.data)
+            )
+            sethotels(res.data)
+
+        })
+            .catch((err) => {
+                console.log(err);
+            })
+  },)
 
     const photos = [
         {
@@ -55,7 +90,16 @@ const Hotel = () => {
     };
 
     return (
-        <div>
+       
+            <div>
+                
+            <div className="d-flex flex-wrap">
+                {hotels.map(function (allhotels) {
+                    return <div key={allhotels.name}>
+                        {allhotels.name}
+                        </div>
+                          })}
+            </div>
             <Navbar />
             <Header type="list" />
             <div className="hotelContainer">
@@ -72,6 +116,8 @@ const Hotel = () => {
                             onClick={() => handleMove("l")}
                         />
                         <div className="sliderWrapper">
+                        {/* <Card.Img variant="top" src={`${urlToImage}/${movies.backdrop_path} `} /> */}
+
                             <img src={photos[slideNumber].src} alt="" className="sliderImg" />
                         </div>
                         <FontAwesomeIcon
@@ -108,8 +154,8 @@ const Hotel = () => {
                     </div>
                     <div className="hotelDetails">
                         <div className="hotelDetailsTexts">
-                            <h1 className="hotelTitle">Stay in the heart of City</h1>
-                            <p className="hotelDesc">
+                            <h1 className="hotelTitle"> {hotels.title} Stay in the heart of City</h1>
+                            <p className="hotelDesc"> {hotels.title}
                                 Located a 5-minute walk from St. Florian's Gate in Krakow, Tower
                                 Street Apartments has accommodations with air conditioning and
                                 free WiFi. The units come with hardwood floors and feature a

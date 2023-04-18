@@ -1,10 +1,66 @@
 import "./featured.css";
 
+
+
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import sethotel from "../../store/actions/action";
+
+
+
+    
+
+
+
+
 const Featured = () => {
+  const [slideNumber, setSlideNumber] = useState(0);
+  const [open, setOpen] = useState(false);
+
+  const dispatch = useDispatch()
+
+  const [page, setPage] = useState(1)
+
+  const hotels = useSelector((state)=> state.gethotels)
+
+  useEffect(()=>{
+
+
+    dispatch( sethotel(page))
+},)
+
+
   return (
+
+    
     <div className="featured">
       <>
-        <div className="featuredItem">
+      
+      <div className="d-flex ">
+                {hotels.map(function (allhotels) {
+                    return <div key={allhotels.name}>
+              <div className="featuredItem  ">
+          <img
+          className=" m-4 featuredImg" variant="top"
+            src={allhotels.hotel_img}
+            alt=""
+           
+          />
+          <div className="featuredTitles ms-3">
+            <h5>{allhotels.name}</h5>
+            <h6>
+              {" "}
+              {allhotels.address.city},
+          
+               {allhotels.address.country}{" "}
+            </h6>
+          </div>
+        </div>
+
+                        </div>
+                          })}
+            </div>
+        {/* <div className="featuredItem">
           <img
             src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/26136872.jpg?k=9e1ccdbdeca1c1f2b3b570498db2ef0823d2f342fdb4f910cc618e5ab52a9944&o=&hp=1"
             alt=""
@@ -48,7 +104,7 @@ const Featured = () => {
               Kingdom
             </p>
           </div>
-        </div>
+        </div> */}
       </>
     </div>
   );

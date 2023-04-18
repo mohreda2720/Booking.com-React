@@ -1,52 +1,52 @@
 .header {
-    background-color: #003580;
-    display: flex;
-    justify-content: center;
-    color: white;
+  background-color: #003580;
+  display: flex;
+  justify-content: center;
+  color: white;
 }
 
 .headerContainer {
-    width: 100%;
-    max-width: 1024px;
-    margin: 20px 0px 100px 0px;
+  width: 100%;
+  max-width: 1024px;
+  margin: 20px 0px 100px 0px;
 }
 
 .headerList {
-    display: flex;
-    gap: 40px;
-    margin-bottom: 40px;
+  display: flex;
+  gap: 40px;
+  margin-bottom: 40px;
 }
 
 .headerListItem {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
 }
 
 .headerListItem.active {
-    border: 1px solid white;
-    border-radius: 20px;
-    padding: 10px;
+  border: 1px solid white;
+  border-radius: 20px;
+  padding: 10px;
 }
 
 .headerDesc {
-    margin: 20px 0px;
+  margin: 20px 0px;
 }
 
 .headerBtn {
-    background-color: #0071c2;
-    color: white;
-    font-weight: 500;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
+  background-color: #0071c2;
+  color: white;
+  font-weight: 500;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
 }
 
 
 
 .headerSearch {
-  height: 60px;
+  /* height: 60px; */
   background-color: white;
   border: 3px solid #febb02;
   display: flex;
@@ -56,7 +56,14 @@
   border-radius: 5px;
   margin-top: 50px;
   width: 100%;
-  max-width: 1024px;
+  /* max-width: 1024px; */
+}
+
+@media screen and (max-width: 768px) {
+  .headerSearch {
+    flex-direction: column;
+    align-items: start;
+  }
 }
 
 .headerIcon {
@@ -67,8 +74,9 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  
+  justify-content: space-between;
 }
+
 
 .headerSearchInput {
   border: none;
@@ -78,7 +86,7 @@
 .headerSearchText {
   color: lightgray;
   cursor: pointer;
- 
+
 }
 
 .date {

@@ -8,6 +8,7 @@ import List from "./pages/list/List";
 
 function App() {
   return (
+   
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
@@ -15,6 +16,8 @@ function App() {
         <Route path="/hotels/:id" element={<Hotel />} />
       </Routes>
     </BrowserRouter>
+ 
+
   );
 }
 
