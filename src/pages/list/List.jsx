@@ -22,7 +22,7 @@ const List = () => {
     useEffect(() => {
         dispatch(searchByCity(desnation))
     })
-    
+
 
     return (
         <div>
@@ -88,13 +88,13 @@ const List = () => {
                         <button>Search</button>
                     </div>
                     <div className="listResult">
-                        {hotelsByCity.map(hotel=>(<SearchItem hotel={hotel} key={hotel._id}/>))}
-                        
+                        {hotelsByCity.map(hotel => (<SearchItem hotel={hotel} key={hotel._id} />))}
+
                     </div>
                 </div>
             </div>
         </div>
-    )
-}
 
-export default List;
+    );
+}
+export default List
