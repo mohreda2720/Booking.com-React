@@ -1,15 +1,15 @@
 import "./searchItem.css";
 
-const SearchItem = () => {
+const SearchItem = ({hotel}) => {
     return (
         <div className="searchItem">
             <img
-                src="https://images.pexels.com/photos/1001965/pexels-photo-1001965.jpeg?cs=srgb&dl=architecture-chair-contemporary-1001965.jpg&fm=jpg"
+                src={hotel.HotelImg}
                 alt=""
                 className="siImg"
             />
             <div className="siDesc">
-                <h1 className="siTitle">Tower Street Apartments</h1>
+                <h1 className="siTitle">{hotel.name}</h1>
                 <span className="siDistance">500m from center</span>
                 <span className="siTaxiOp">Free airport taxi</span>
                 <span className="siSubtitle">
