@@ -40,35 +40,9 @@ const Featured = () => {
                 {hotels.map(function (allhotels) {
                     return <div key={allhotels.name}>
               <div className="featuredItem  ">
-          {/* <img
-          className=" m-4 featuredImg" variant="top"
-            src={allhotels.HotelImg}
-            alt=""
-           
-          /> */}
-          <div className="featuredTitles ms-3">
-            <h5>{allhotels.name}</h5>
-            <h6>
-              {" "}
-              {allhotels.Address.City},
-          
-               {allhotels.Address.Country}{" "}
-            </h6>
-          </div>
-        </div>
-
-                        </div>
-                          })}
-            </div>
-
-              
-      <div className="d-flex ">
-                {hotels.map(function (allhotels) {
-                    return <div key={allhotels.name}>
-              <div className="featuredItem  ">
           <img
           className=" m-4 featuredImg" variant="top"
-            src={allhotels.HotelImg}
+            src={allhotels.hotel_img}
             alt=""
            
           />
@@ -76,9 +50,9 @@ const Featured = () => {
             <h5>{allhotels.name}</h5>
             <h6>
               {" "}
-              {allhotels.Address.City},
+              {allhotels.address.city},
           
-               {allhotels.Address.Country}{" "}
+               {allhotels.address.country}{" "}
             </h6>
           </div>
         </div>
