@@ -16,6 +16,8 @@ const List = () => {
     const [date, setDate] = useState(location.state.date)
     const [openDate, setOpenDate] = useState(false)
     const [options, setOptions] = useState(location.state.options)
+    const [min, setMin] = useState(undefined)
+    const [max, setMax] = useState(undefined)
     const hotelsByCity = useSelector((state) => state.search.hotelsByCity)
     const dispatch = useDispatch()
 
@@ -23,6 +25,9 @@ const List = () => {
         dispatch(searchByCity(desnation))
     })
 
+    const handleClick = () => {
+        dispatch(searchByCity(desnation))
+    }
 
     return (
         <div>
@@ -57,13 +62,13 @@ const List = () => {
                                     <span className="lsOptionText">
                                         Min price <small>per nigth</small>
                                     </span>
-                                    <input type="number" className="lsOptionInput" />
+                                    <input type="number" onChange={e => setMin(e.target.value)} className="lsOptionInput" />
                                 </div>
                                 <div className="lsOptionItem">
                                     <span className="lsOptionText">
                                         Max price <small>per nigth</small>
                                     </span>
-                                    <input type="number" className="lsOptionInput" />
+                                    <input type="number" onChange={e => setMax(e.target.value)} className="lsOptionInput" />
                                 </div>
                                 <div className="lsOptionItem">
                                     <span className="lsOptionText">
@@ -85,7 +90,7 @@ const List = () => {
                                 </div>
                             </div>
                         </div>
-                        <button>Search</button>
+                        <button onClick={handleClick}>Search</button>
                     </div>
                     <div className="listResult">
                         {hotelsByCity.map(hotel => (<SearchItem hotel={hotel} key={hotel._id} />))}
