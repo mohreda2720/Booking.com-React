@@ -14,6 +14,7 @@ const List = () => {
     const location = useLocation();
     const [desnation, setDestnation] = useState(location.state.destination)
     const [date, setDate] = useState(location.state.date)
+    console.log(location.state.date);
     const [openDate, setOpenDate] = useState(false)
     const [options, setOptions] = useState(location.state.options)
     const [min, setMin] = useState(undefined)
@@ -91,6 +92,7 @@ const List = () => {
                             </div>
                         </div>
                         <button onClick={handleClick}>Search</button>
+                        <button >Search</button>
                     </div>
                     <div className="listResult">
                         {hotelsByCity.map(hotel => (<SearchItem hotel={hotel} key={hotel._id} />))}

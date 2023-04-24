@@ -3,46 +3,94 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import sethotel from "../../store/actions/action";
 
+import { Link } from "react-router-dom";
+
 const Featured = () => {
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
-  const dispatch = useDispatch()
-  const [page, setPage] = useState(1)
-  const hotels = useSelector((state)=> state.hotels.gethotels)
+  const dispatch = useDispatch();
+  const [page, setPage] = useState(1);
+  const hotels = useSelector((state) => state.hotels.gethotels);
 
-  useEffect(()=>{
-    dispatch( sethotel(page))
-},)
-
+  useEffect(() => {
+    dispatch(sethotel(page));
+  });
 
   return (
-    
     <div className="featured">
       <>
-      <div className="d-flex ">
-                {hotels.map(function (allhotels) {
-                    return <div key={allhotels.name}>
-              <div className="featuredItem  ">
-          <img
-          className=" m-4 featuredImg" variant="top"
-            src={allhotels.HotelImg}
-            alt=""
-           
-          />
-          <div className="featuredTitles ms-3">
-            <h5>{allhotels.name}</h5>
-            <h6>
-              {" "}
-              {allhotels.Address.City},
+        <div className="d-flex ">
           
-               {allhotels.Address.Country}{" "}
-            </h6>
-          </div>
-        </div>
+          {hotels.map(function (allhotels) {
+            // console.log(allhotels);
 
-                        </div>
-                          })}
-            </div>
+            return (
+              <div key={allhotels.name}>
+                <div className="featuredItem  ">
+                  <Link
+                    to={`/hotels/${allhotels._id}`}
+                    className="text-dark"
+                    style={{ textDecoration: "none" }}
+                  >
+                    {/* <img src={allhotels.HotelImg} alt="" className="siImg" /> */}
+
+                    <img
+                      className=" m-4 featuredImg"
+                      variant="top"
+                      src={allhotels.HotelImg}
+                      alt=""
+                    />
+                  </Link>
+                  <div className="featuredTitles ms-3">
+                    <h5>{allhotels.name}</h5>
+                    <h6>
+                      {" "}
+                      {allhotels.Address.City},
+                      {allhotels.Address.Country},
+                     
+                      {/* {allhotels.TripleRooms.BedType} */}
+                     {" "}
+                    </h6>
+                  </div>
+                </div>
+                {/* <div>{allhotels.SingleRooms.RoomType}</div>
+                <div>{allhotels.DoubleRooms.RoomType}</div>
+                <div>{allhotels.TripleRooms.RoomType}</div> */}
+                <div className="featuredItem  ">
+                  <Link
+                    to={`/hotels/${allhotels._id}`}
+                    className="text-dark"
+                    style={{ textDecoration: "none" }}
+                  >
+                    {/* <img src={allhotels.HotelImg} alt="" className="siImg" /> */}
+
+                    <img
+                      className=" m-4 featuredImg"
+                      variant="top"
+                      src={hotels[0].HotelImg}
+                      alt=""
+                    />
+                  </Link>
+                  <div className="featuredTitles ms-3">
+                    <h5>{hotels[0].name}</h5>
+                    <h6>
+                      {" "}
+                      {hotels[0].Address.City},
+                      {hotels[0].Address.Country},
+                     
+                      {/* {allhotels.TripleRooms.BedType} */}
+                     {" "}
+                    </h6>
+                  </div>
+                </div>
+            
+              </div>
+              
+            );
+            
+          })}
+           
+        </div>
         {/* <div className="featuredItem">
           <img
             src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/26136872.jpg?k=9e1ccdbdeca1c1f2b3b570498db2ef0823d2f342fdb4f910cc618e5ab52a9944&o=&hp=1"
