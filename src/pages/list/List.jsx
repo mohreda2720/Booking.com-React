@@ -92,7 +92,6 @@ const List = () => {
                             </div>
                         </div>
                         <button onClick={handleClick}>Search</button>
-                        <button >Search</button>
                     </div>
                     <div className="listResult">
                         {hotelsByCity.map(hotel => (<SearchItem hotel={hotel} key={hotel._id} />))}
