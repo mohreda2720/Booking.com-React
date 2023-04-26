@@ -66,10 +66,10 @@ const SearchItem = ({ hotel }) => {
         <div className="siDetailsTexts">
           <span className="siPrice">${hotel.SSRoomPrice}</span>
           <span className="siTaxOp">Includes taxes and fees</span>
-          <Link
+          {/* <Link
             to={`/hotels/${hotel._id}`}>
           <button className="siCheckButton">See availability</button>
-          </Link>
+          </Link> */}
           <button onClick={handleSearch} className="siCheckButton">See availability</button>
         </div>
       </div>

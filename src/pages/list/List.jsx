@@ -91,8 +91,7 @@ const List = () => {
                                 </div>
                             </div>
                         </div>
-                        <button onClick={handleClick}>Search</button>
-                        <button >Search</button>
+                        <button className="bg-primary" onClick={handleClick}>Search</button>
                     </div>
                     <div className="listResult">
                         {hotelsByCity.map(hotel => (<SearchItem hotel={hotel} key={hotel._id} />))}
