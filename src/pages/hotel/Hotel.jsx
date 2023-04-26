@@ -20,6 +20,10 @@ import axiosConfig from './../../axiosConfig/axiosConfig';
 import { useParams } from 'react-router-dom';
 import Reserve from "../../components/reserve/Reserve";
 import searchItem from "../../components/searchItem/SearchItem";
+<<<<<<< HEAD
+=======
+
+>>>>>>> 28180dc3fe20d4c94e003f2d778714e9bdfbe011
 
 const Hotel = () => {
    const hotelllll = useSelector((state) => state.hotels.gethotels);
@@ -31,7 +35,11 @@ const Hotel = () => {
   
     const location = useLocation();
 
+<<<<<<< HEAD
     // const [dates, setDate] = useState(location.state.date)
+=======
+    //  const [dates, setDate] = useState(location.state.date)
+>>>>>>> 28180dc3fe20d4c94e003f2d778714e9bdfbe011
     const [openDate, setOpenDate] = useState(false)
     // const [options, setOptions] = useState(location.state.options)
     // const hotelsByCity = useSelector((state) => state.search.hotelsByCity)
@@ -49,6 +57,10 @@ const Hotel = () => {
   const [address1, setaddress1] = useState({});
   const [room1, setroom1] = useState([]);
  
+<<<<<<< HEAD
+=======
+  const [date, setDate] = useState(location.state.date)
+>>>>>>> 28180dc3fe20d4c94e003f2d778714e9bdfbe011
 
   const hotelll = hotelllll.find((hotel) => hotel._id == `${id}`)
 //   useEffect(() => {
@@ -76,12 +88,21 @@ console.log(hotelll);
     setSlideNumber(i);
     setOpen(true);
   };
+<<<<<<< HEAD
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
   function dayDifference(date1, date2) {
     const timeDiff = Math.abs(date2.getTime() - date1.getTime());
     const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
     return diffDays;
   }
+=======
+  // const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+  // function dayDifference(date1, date2) {
+  //   const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+  //   const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
+  //   return diffDays;
+  // }
+>>>>>>> 28180dc3fe20d4c94e003f2d778714e9bdfbe011
 
   // const days = dayDifference(dates[0].endDate, dates[0].startDate);
   // setDate([dates[0].endDate, dates[0].startDate])

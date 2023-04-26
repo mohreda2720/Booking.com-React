@@ -1,5 +1,6 @@
 import './searchItem.css';
 import { Link } from 'react-router-dom';
+<<<<<<< HEAD
 import React, { useEffect, useState } from 'react';
 // import { AiOutlineHeart, AiFillHeart } from 'react-icons';
 // import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
@@ -86,6 +87,27 @@ const SearchItem = ({ hotel }) => {
 
   // ----------------------------------------------------------------------------------------------------------
 
+=======
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+const SearchItem = ({ hotel }) => {
+
+  const location = useLocation();
+  const [desnation, setDestnation] = useState(location.state.destination)
+  const [date, setDate] = useState(location.state.date)
+  console.log(location.state.date);
+  const [openDate, setOpenDate] = useState(false)
+  const [options, setOptions] = useState(location.state.options)
+  const hotelsByCity = useSelector((state) => state.search.hotelsByCity)
+  const dispatch = useDispatch()
+
+  const navigate = useNavigate();
+  const handleSearch = () => {
+    navigate(`/hotels/${hotel._id}`, { state: {date, options } });
+  };
+>>>>>>> 28180dc3fe20d4c94e003f2d778714e9bdfbe011
   return (
     <div className="searchItem">
       {/* console.log(favMovie); */}
@@ -130,6 +152,7 @@ const SearchItem = ({ hotel }) => {
         <div className="siDetailsTexts">
           <span className="siPrice">$123</span>
           <span className="siTaxOp">Includes taxes and fees</span>
+<<<<<<< HEAD
           <button className="siCheckButton">See availability</button>
           <br />
           <div>
@@ -150,6 +173,9 @@ const SearchItem = ({ hotel }) => {
               )}
             </button>
           </div>
+=======
+          <button onClick={handleSearch} className="siCheckButton">See availability</button>
+>>>>>>> 28180dc3fe20d4c94e003f2d778714e9bdfbe011
         </div>
       </div>
     </div>
