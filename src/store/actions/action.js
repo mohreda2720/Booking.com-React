@@ -1,4 +1,4 @@
-import axiosConfig from "../../axiosConfig/axiosConfig"
+import axiosConfig from '../../axiosConfig/axiosConfig';
 
 
 

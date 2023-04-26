@@ -1,11 +1,18 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+<<<<<<< HEAD
+
+import "./reserve.css";
+import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from 'react';
+=======
 import Header from "../../components/header/Header";
 import "./reserve.css";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from 'react';
 import axiosConfig from "../../axiosConfig/axiosConfig"
 
+>>>>>>> 28180dc3fe20d4c94e003f2d778714e9bdfbe011
 // import useFetch from "../../hooks/useFetch";
 // import { useContext, useState } from "react";
 // import { SearchContext } from "../../context/SearchContext";
@@ -15,6 +22,12 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 import SearchItem from "../../components/searchItem/SearchItem";
 import { useLocation } from "react-router-dom";
+<<<<<<< HEAD
+const Reserve = ({ setOpen, hotelId }) => {
+  const { id } = useParams();
+ 
+  const location = useLocation();
+=======
 import searchByCity from "../../store/actions/searchAction";
 
 const Reserve = ({ setOpen, hotelId }) => {
@@ -32,15 +45,22 @@ const Reserve = ({ setOpen, hotelId }) => {
   
   
   console.log(location);
+>>>>>>> 28180dc3fe20d4c94e003f2d778714e9bdfbe011
   const [selectedRooms, setSelectedRooms] = useState([]);
 //   const { data, loading, error } = useFetch(`/hotels/room/${hotelId}`);
   const data1 = useSelector((state) => state.hotels.gethotels);
   const data = data1.find((hotel) => hotel._id == `${id}`)
+<<<<<<< HEAD
+   const [dates, setDate] = useState(location.state.date)
+
+
+=======
    
   const [dates, setDate] = useState(location.state.date)
   console.log(dates);
    const dispatch = useDispatch()
    
+>>>>>>> 28180dc3fe20d4c94e003f2d778714e9bdfbe011
   const getDatesInRange = (startDate, endDate) => {
     const start = new Date(startDate);
     const end = new Date(endDate);
@@ -59,6 +79,15 @@ const Reserve = ({ setOpen, hotelId }) => {
 
   const alldates = getDatesInRange(dates[0].startDate, dates[0].endDate);
 
+<<<<<<< HEAD
+  // const isAvailable = (roomNumber) => {
+  //   const isFound = roomNumber.unavailableDates.some((date) =>
+  //     alldates.includes(new Date(date).getTime())
+  //   );
+
+  //   return !isFound;
+  // };
+=======
   const isAvailable = (roomNumber) => {
     const isFound = roomNumber.unavailableDates.some((date) =>
       alldates.includes(new Date(date).getTime())
@@ -66,6 +95,7 @@ const Reserve = ({ setOpen, hotelId }) => {
 
     return !isFound;
   };
+>>>>>>> 28180dc3fe20d4c94e003f2d778714e9bdfbe011
 
   const handleSelect = (e) => {
     const checked = e.target.checked;
@@ -76,6 +106,25 @@ const Reserve = ({ setOpen, hotelId }) => {
         : selectedRooms.filter((item) => item !== value)
     );
   };
+<<<<<<< HEAD
+
+  const navigate = useNavigate();
+
+  // const handleClick = async () => {
+  //   try {
+  //     await Promise.all(
+  //       selectedRooms.map((roomId) => {
+  //         const res = axios.put(`/rooms/availability/${roomId}`, {
+  //           dates: alldates,
+  //         });
+  //         return res.data;
+  //       })
+  //     );
+  //     setOpen(false);
+  //     navigate("/");
+  //   } catch (err) {}
+  // };
+=======
   
   const navigate = useNavigate();
 
@@ -93,6 +142,7 @@ const Reserve = ({ setOpen, hotelId }) => {
       navigate("/");
     } catch (err) {}
   };
+>>>>>>> 28180dc3fe20d4c94e003f2d778714e9bdfbe011
   return (
     <div className="reserve">
       <div className="rContainer">
@@ -102,6 +152,20 @@ const Reserve = ({ setOpen, hotelId }) => {
           onClick={() => setOpen(false)}
         />
         <span>Select your rooms:</span>
+<<<<<<< HEAD
+        {data.map((item) => (
+          <div className="rItem" key={item._id}>
+            <div className="rItemInfo">
+              <div className="rTitle">{item.title}</div>
+              <div className="rDesc">{item.desc}</div>
+              <div className="rMax">
+                Max people: <b>{item.maxPeople}</b>
+              </div>
+              <div className="rPrice">{item.price}</div>
+            </div>
+            <div className="rSelectRooms">
+              {item.roomNumbers.map((roomNumber) => (
+=======
         {hotelll.rooms.map((rooms)=>
         (
           <div className="rItem" key={rooms._id}>
@@ -116,6 +180,7 @@ const Reserve = ({ setOpen, hotelId }) => {
             <div className="rSelectRooms">
               
               {rooms.roomNumbers.map((roomNumber) => (
+>>>>>>> 28180dc3fe20d4c94e003f2d778714e9bdfbe011
                 <div className="room">
                   <label>{roomNumber.number}</label>
                   <input
@@ -128,8 +193,12 @@ const Reserve = ({ setOpen, hotelId }) => {
               ))}
             </div>
           </div>
+<<<<<<< HEAD
+        ))}
+=======
         )
         )}
+>>>>>>> 28180dc3fe20d4c94e003f2d778714e9bdfbe011
         <button onClick={handleClick} className="rButton">
           Reserve Now!
         </button>

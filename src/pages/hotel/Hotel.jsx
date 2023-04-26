@@ -21,7 +21,6 @@ import { useParams } from 'react-router-dom';
 import Reserve from "../../components/reserve/Reserve";
 import searchItem from "../../components/searchItem/SearchItem";
 
-
 const Hotel = () => {
    const hotelllll = useSelector((state) => state.hotels.gethotels);
   // console.log(hotelllll);

@@ -1,4 +1,4 @@
-import "./searchItem.css";
+import './searchItem.css';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -17,15 +17,12 @@ const SearchItem = ({ hotel }) => {
 
   const navigate = useNavigate();
   const handleSearch = () => {
-    navigate(`/hotels/${hotel._id}`, { state: {date, options } });
+    navigate(`/hotels/${hotel._id}`, { state: { date, options } });
   };
   return (
     <div className="searchItem">
-      {/* <img
-        src={hotel.HotelImg}
-        alt=""
-        className="siImg"
-      /> */}
+      {/* console.log(favMovie); */}
+      <div> </div>
       <Link
         to={`/hotels/${hotel._id}`}
         className="text-dark"
@@ -68,15 +65,14 @@ const SearchItem = ({ hotel }) => {
           <span className="siTaxOp">Includes taxes and fees</span>
           <Link
             to={`/hotels/${hotel._id}`}>
-          <button className="siCheckButton">See availability</button>
+            <button className="siCheckButton">See availability</button>
           </Link>
+
           <button onClick={handleSearch} className="siCheckButton">See availability</button>
         </div>
       </div>
     </div>
   );
-}
-
-
+};
 
 export default SearchItem;
