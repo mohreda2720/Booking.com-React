@@ -1,9 +1,9 @@
 import './searchItem.css';
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
+
 const SearchItem = ({ hotel }) => {
 
   const location = useLocation();
@@ -61,7 +61,7 @@ const SearchItem = ({ hotel }) => {
           <button>8.9</button>
         </div>
         <div className="siDetailsTexts">
-          <span className="siPrice">${hotel.SSRoomPrice}</span>
+          <span className="siPrice">$123</span>
           <span className="siTaxOp">Includes taxes and fees</span>
 
           <button onClick={handleSearch} className="siCheckButton">See availability</button>
