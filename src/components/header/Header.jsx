@@ -15,7 +15,9 @@ import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
-
+import { Link } from "react-router-dom";
+import changeHeart from "../../store/actions/heartToggleAction";
+import { useSelector } from "react-redux";
 const Header = ({ type }) => {
   const [destination, setDestination] = useState("");
   const [openDate, setOpenDate] = useState(false);
@@ -26,6 +28,7 @@ const Header = ({ type }) => {
       key: "selection",
     },
   ]);
+  const favMovie = useSelector((state) => state.haertToggleReducer.favMovies);
   const [openOptions, setOpenOptions] = useState(false);
   const [options, setOptions] = useState({
     adult: 1,
@@ -85,6 +88,15 @@ const Header = ({ type }) => {
             <FontAwesomeIcon icon={faTaxi} />
             <span>{t("Airport taxis")}</span>
           </div>
+          <Link   to={`/MyWishList`}>
+         <button type="button" class="btn btn-primary position-relative">
+         Favorites
+  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+  {favMovie.length} 
+    <span class="visually-hidden">Favorites</span>
+  </span>
+</button>
+</Link>
         </div>
         {type !== "list" && (
           <>

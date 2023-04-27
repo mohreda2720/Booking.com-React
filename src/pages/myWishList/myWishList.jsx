@@ -1,49 +1,37 @@
-import React from 'react';
-import { Card } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { delFav } from '../../store/action/actions';
+import React from "react";
+import { Card } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import changeHeart from "../../store/actions/heartToggleAction";
+import { useEffect, useState } from "react";
+import sethotel from "../../store/actions/action";
+import SearchItem from "../../components/searchItem/SearchItem";
 
 const MyWishList = () => {
-  const favMovie = useSelector((state) => state.movies);
-  console.log(favMovie);
+  useEffect(() => {
+    dispatch(sethotel());
+  });
+
+  const hotels = useSelector((state) => state.hotels.gethotels);
+
+  const addFav = useSelector((state) => state.haertToggleReducer.favMovies);
+
+  const favoriteHotels = hotels.filter((hotels) => addFav.includes(hotels._id));
+  const [movie, setMovie] = useState([]);
+
   const dispatch = useDispatch();
 
-  const delMovie = (index) => {
-    favMovie.splice(index, 1);
-    dispatch(delFav(favMovie));
-  };
+  useEffect(() => {
+    dispatch(sethotel());
+  });
 
   return (
-    <div className="row">
-      {favMovie.map((movie, index) => (
-        <Card
-          key={index}
-          style={{
-            width: '18rem',
-            height: 'auto',
-            margin: '20px',
-            borderColor: 'light gray',
-          }}
-        >
-          {/* <Card.Img
-            variant="top"
-            src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-            style={{ width: '100%', height: '300px' }}
-          /> */}
-          <Card.Body>
-            <Card.Title>{movie.title}</Card.Title>
-            <Card.Text>{movie.release_date}</Card.Text>
-            <button
-              className="me-auto  bg-info rounded"
-              onClick={() => delMovie(index)}
-            >
-              <i class="fa-solid fa-trash"></i>
-            </button>
-          </Card.Body>
-        </Card>
+    <div className="listResult">
+      {favoriteHotels.map((hotel) => (
+        // <SearchItem hotel={hotel} key={hotel._id} />
+<div> {hotel.name}</div>
       ))}
     </div>
   );
 };
 
-export default Favourites;
+export default MyWishList;

@@ -5,7 +5,8 @@ import Home from './pages/home/Home';
 import List from "./pages/list/List";
 import RegisterComponent from './pages/register/Register';
 import LoginComponent from './pages/login/Login';
-
+import MyWishList from "./pages/myWishList/myWishList"
+import Hotelsbycity from "./pages/hotelsbycity/hotelsbycity"
 
 
 
@@ -19,6 +20,9 @@ function App() {
         <Route path="/register" element={<RegisterComponent />}></Route>
         <Route path="/login" element={<LoginComponent />}></Route>
         <Route path="/hotels/:id" element={<Hotel />} />
+        <Route path="/MyWishList" element={<MyWishList />} />
+        <Route path="/hotelsbycity" element={<Hotelsbycity />}></Route>
+
       </Routes>
     </BrowserRouter>
 
