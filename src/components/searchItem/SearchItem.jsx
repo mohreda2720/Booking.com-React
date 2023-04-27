@@ -64,6 +64,10 @@ const SearchItem = ({ hotel }) => {
           <span className="siPrice">$123</span>
           <span className="siTaxOp">Includes taxes and fees</span>
 
+          {/* <Link
+            to={`/hotels/${hotel._id}`}>
+          <button className="siCheckButton">See availability</button>
+          </Link> */}
           <button onClick={handleSearch} className="siCheckButton">See availability</button>
         </div>
       </div>
