@@ -8,7 +8,7 @@ import SearchItem from "../../components/searchItem/SearchItem";
 import { format } from "date-fns";
 import { useSelector, useDispatch } from "react-redux";
 import searchByCity from "../../store/actions/searchAction";
-
+import { Link } from "react-router-dom";
 const List = () => {
 
     const location = useLocation();
@@ -91,6 +91,12 @@ const List = () => {
                         {hotelsByCity.map(hotel => (<SearchItem hotel={hotel} key={hotel._id} />))}
 
                     </div>
+                    <Link
+        to={`/MyWishList`}>
+      <button style={{backgroundColor:"#0d6efd",color:"white"}} className="btn rounded"
+     
+      >go to my MyWishList</button>
+      </Link>
                 </div>
             </div>
         </div>
