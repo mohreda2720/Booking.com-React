@@ -68,9 +68,7 @@ const SearchItem = ({ hotel }) => {
           <button className="siCheckButton">See availability</button>
           </Link> */}
           <button onClick={handleSearch} className="siCheckButton">See availability</button>
-          <button onClick={handleSearch} className="siCheckButton">
-            See availability
-          </button>
+
         </div>
       </div>
     </div>
