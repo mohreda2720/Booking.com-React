@@ -7,6 +7,7 @@ import RegisterComponent from './pages/register/Register';
 import LoginComponent from './pages/login/Login';
 import MyWishList from "./pages/myWishList/myWishList"
 import Hotelsbycity from "./pages/hotelsbycity/hotelsbycity"
+import PaymentProcess from './pages/payment/Payment';
 
 
 
@@ -22,7 +23,7 @@ function App() {
         <Route path="/hotels/:id" element={<Hotel />} />
         <Route path="/MyWishList" element={<MyWishList />} />
         <Route path="/hotelsbycity" element={<Hotelsbycity />}></Route>
-
+        <Route path="/payment" element={<PaymentProcess/>}></Route>
       </Routes>
     </BrowserRouter>
 

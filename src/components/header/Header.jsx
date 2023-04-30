@@ -88,15 +88,15 @@ const Header = ({ type }) => {
             <FontAwesomeIcon icon={faTaxi} />
             <span>{t("Airport taxis")}</span>
           </div>
-          <Link   to={`/MyWishList`}>
-         <button type="button" class="btn btn-primary position-relative">
-         Favorites
-  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-  {favMovie.length} 
-    <span class="visually-hidden">Favorites</span>
-  </span>
-</button>
-</Link>
+          <Link to={`/MyWishList`}>
+            <button type="button" className="btn btn-primary position-relative">
+              Favorites
+              <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {favMovie.length}
+                <span className="visually-hidden">Favorites</span>
+              </span>
+            </button>
+          </Link>
         </div>
         {type !== "list" && (
           <>

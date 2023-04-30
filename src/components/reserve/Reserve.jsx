@@ -19,7 +19,6 @@ import searchByCity from "../../store/actions/searchAction";
 
 const Reserve = ({ setOpen, hotelId }) => {
   const hotelllll = useSelector((state) => state.hotels.gethotels);
-
   const [hotels, sethotels] = useState([]);
   const { id } = useParams();
   const location = useLocation();
@@ -69,7 +68,9 @@ const Reserve = ({ setOpen, hotelId }) => {
       checked
         ? [...selectedRooms, value]
         : selectedRooms.filter((item) => item !== value)
+
     );
+    console.log(selectedRooms)
   };
 
   const navigate = useNavigate();
@@ -86,7 +87,7 @@ const Reserve = ({ setOpen, hotelId }) => {
       );
       setOpen(false);
       navigate("/");
-    } catch (err) {}
+    } catch (err) { }
   };
   return (
     <div className="reserve">
@@ -112,9 +113,9 @@ const Reserve = ({ setOpen, hotelId }) => {
                 <div className="room">
                   {/* Dont Forget to change num. to price */}
                   <label
-                  
-                  hidden={!isAvailable(roomNumber)}
-                  >{roomNumber.Price} LE.</label> 
+
+                    hidden={!isAvailable(roomNumber)}
+                  >{roomNumber.Price} LE.</label>
 
                   <input
                     type="checkbox"
