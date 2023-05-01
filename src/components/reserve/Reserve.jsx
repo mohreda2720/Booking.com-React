@@ -5,13 +5,15 @@ import "./reserve.css";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import axiosConfig from "../../axiosConfig/axiosConfig";
-
 // import useFetch from "../../hooks/useFetch";
 // import { useContext, useState } from "react";
 // import { SearchContext } from "../../context/SearchContext";
 import axios from "axios";
 import { DateRange } from "react-date-range";
 import { useNavigate } from "react-router-dom";
+import queryString from 'query-string';
+import { Link } from "react-router-dom";
+//import { createBrowserHistory } from 'history';
 import { useParams } from "react-router-dom";
 import SearchItem from "../../components/searchItem/SearchItem";
 import { useLocation } from "react-router-dom";
@@ -19,36 +21,41 @@ import searchByCity from "../../store/actions/searchAction";
 
 const Reserve = ({ setOpen, hotelId }) => {
   const hotelllll = useSelector((state) => state.hotels.gethotels);
-
   const [hotels, sethotels] = useState([]);
+  // const [reservation, setReservation] = useState({
+  //   hotelData: "",
+  //   checkInDate: "",
+  //   checkOutDate: "",
+  //   totalCost: "",
+  //   customerName: "",
+  //   customerEmail: "",
+  //   paymentStatus: "",
+  //   paymentId: "",
+  // })
   const { id } = useParams();
   const location = useLocation();
   const hotelll = hotelllll.find((hotel) => hotel._id == `${id}`);
-  console.log(hotelll);
+  //console.log(hotelll);
 
-  console.log(location);
+  //console.log(location);
   const [selectedRooms, setSelectedRooms] = useState([]);
   //   const { data, loading, error } = useFetch(`/hotels/room/${hotelId}`);
   const data1 = useSelector((state) => state.hotels.gethotels);
   const data = data1.find((hotel) => hotel._id == `${id}`);
-
+  const recievedDates = location.state.date
   const [dates, setDate] = useState(location.state.date);
-  console.log(dates);
+  //console.log(dates);
   const dispatch = useDispatch();
 
   const getDatesInRange = (startDate, endDate) => {
     const start = new Date(startDate);
     const end = new Date(endDate);
-
     const date = new Date(start.getTime());
-
     const dates = [];
-
     while (date <= end) {
       dates.push(new Date(date).getTime());
       date.setDate(date.getDate() + 1);
     }
-
     return dates;
   };
 
@@ -58,9 +65,11 @@ const Reserve = ({ setOpen, hotelId }) => {
     const isFound = roomNumber.unavailableDates.some((date) =>
       alldates.includes(new Date(date).getTime())
     );
-
     return !isFound;
   };
+
+  // const reservationDataString = queryString.encodeURIComponent.stringify({ dates, selectedRooms, id });
+  // console.log(reservationDataString);
 
   const handleSelect = (e) => {
     const checked = e.target.checked;
@@ -85,8 +94,11 @@ const Reserve = ({ setOpen, hotelId }) => {
         })
       );
       setOpen(false);
-      navigate("/");
-    } catch (err) {}
+      const reservationData = { hotelId: id, rooms: selectedRooms, date: recievedDates };
+      console.log(reservationData);
+      const reservationDataStr = encodeURIComponent(JSON.stringify(reservationData));
+      navigate(`/payment/${reservationDataStr}`)
+    } catch (err) { }
   };
   return (
     <div className="reserve">
@@ -112,9 +124,9 @@ const Reserve = ({ setOpen, hotelId }) => {
                 <div className="room">
                   {/* Dont Forget to change num. to price */}
                   <label
-                  
-                  hidden={!isAvailable(roomNumber)}
-                  >{roomNumber.Price} LE.</label> 
+
+                    hidden={!isAvailable(roomNumber)}
+                  >{roomNumber.Price} LE.</label>
 
                   <input
                     type="checkbox"
@@ -130,6 +142,7 @@ const Reserve = ({ setOpen, hotelId }) => {
         <button onClick={handleClick} className="rButton">
           Reserve Now!
         </button>
+        <Link to={`/Payment/${dates}/${selectedRooms}/${id}`}>Go to Payment</Link>
       </div>
     </div>
   );

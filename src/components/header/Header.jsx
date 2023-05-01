@@ -89,11 +89,11 @@ const Header = ({ type }) => {
             <span>{t("Airport taxis")}</span>
           </div>
           <Link   to={`/MyWishList`}>
-         <button type="button" class="btn btn-primary position-relative">
+         <button type="button" className="btn btn-primary position-relative">
          Favorites
-  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
   {favMovie.length} 
-    <span class="visually-hidden">Favorites</span>
+    <span className="visually-hidden">Favorites</span>
   </span>
 </button>
 </Link>

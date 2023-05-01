@@ -10,7 +10,7 @@ import Form from "react-bootstrap/Form";
 const LoginComponent = () => {
   const dispatch = useDispatch();
   const [userData, setUserData] = useState({
-    userName: "",
+    userEmail: "",
     userPassword: "",
   });
   const allUsers = useSelector((state) => state.users.users);
@@ -23,26 +23,27 @@ const LoginComponent = () => {
   });
 
   const handleLogin = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
-    const user = allUsers.find((user) => user.userName === userData.userName);
-    if (!user) {
-      alert("Invalid name or password");
-      return;
-    }
+     const user = allUsers.find((user) => user.userEmail === userData.userEmail);
+     console.log(user)
+    // if (!user) {
+    //   alert("Invalid name or password");
+    //   return;
+    // }
 
-    // Compare the hashed password in the database with the hashed user input password
-    const isMatch = bcrypt.compareSync(
-      userData.userPassword,
-      user.userPassword
-    );
-    if (!isMatch) {
-      alert("Invalid name or password");
-      return;
-    }
+    // // Compare the hashed password in the database with the hashed user input password
+    // const isMatch = bcrypt.compareSync(
+    //   userData.userPassword,
+    //   user.userPassword
+    // );
+    // if (!isMatch) {
+    //   alert("Invalid name or password");
+    //   return;
+    // }
 
-    alert("Login successful");
-    dispatch(loginUser(user));
+    // alert("Login successful");
+    dispatch(loginUser(userData, JSON.stringify(user)));
     navigate("/");
   };
 
@@ -54,9 +55,9 @@ const LoginComponent = () => {
           <Form.Control
             type="text"
             placeholder="Enter name"
-            value={userData.userName}
+            value={userData.userEmail}
             onChange={(e) =>
-              setUserData({ ...userData, userName: e.target.value })
+              setUserData({ ...userData, userEmail: e.target.value })
             }
           />
           <Form.Text className="text-muted"></Form.Text>

@@ -4,6 +4,7 @@ import searchReducer from "./searchReducer";
 import userReducer from "./loginRegister";
 import heartToggleReducer from './toggleReduce';
 import cityreducer from './citiesReducer';
+import reservationReducer from "./reservation";
 
 export default combineReducers({
     hotels: hotelreducer,
@@ -11,4 +12,5 @@ export default combineReducers({
     users: userReducer,
     haertToggleReducer: heartToggleReducer,
     cities: cityreducer,
+    reservations: reservationReducer
 })
