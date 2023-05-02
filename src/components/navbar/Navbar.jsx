@@ -6,7 +6,8 @@ import { logoutUser } from "../../store/actions/loginRegister";
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation(); // get current location using useLocation()
-  const currentUser = useSelector((state) => state.users.currentUser);
+  // const currentUser = useSelector((state) => state.users.currentUser);
+  const currentUser=localStorage.getItem("loggedUser")
   const isLoggedIn = currentUser !== null;
 
   const dispatch = useDispatch();

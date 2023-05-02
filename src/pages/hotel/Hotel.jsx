@@ -23,22 +23,22 @@ import searchItem from "../../components/searchItem/SearchItem";
 import sethotel from '../../store/actions/action';
 
 const Hotel = () => {
-   const hotelllll = useSelector((state) => state.hotels.gethotels);
+  const hotelllll = useSelector((state) => state.hotels.gethotels);
   // console.log(hotelllll);
-  
+
 
   // const [dates, setDate] = useState(location.state.date)
 
-  
-    const location = useLocation();
 
-    //  const [dates, setDate] = useState(location.state.date)
-    const [openDate, setOpenDate] = useState(false)
-    // const [options, setOptions] = useState(location.state.options)
-    // const hotelsByCity = useSelector((state) => state.search.hotelsByCity)
-    // const dispatch = useDispatch()
+  const location = useLocation();
 
-  
+  //  const [dates, setDate] = useState(location.state.date)
+  const [openDate, setOpenDate] = useState(false)
+  // const [options, setOptions] = useState(location.state.options)
+  // const hotelsByCity = useSelector((state) => state.search.hotelsByCity)
+  // const dispatch = useDispatch()
+
+
 
 
   const [hotels, sethotels] = useState([]);
@@ -49,30 +49,10 @@ const Hotel = () => {
   const [photos1, setphotos1] = useState([]);
   const [address1, setaddress1] = useState({});
   const [room1, setroom1] = useState([]);
- 
-  const [date, setDate] = useState(location.state.date)
 
+  const [date, setDate] = useState(location.state.date)
   const hotelll = hotelllll.find((hotel) => hotel._id == `${id}`)
-//   useEffect(() => {
-//     const hotelll = hotelllll.find((hotel) => hotel._id == `${id}`)
-console.log(hotelll);
-//     axiosConfig
-//       .get(`hotels/${id}`)
-//       .then((res) => {
-//         // console.log(res.data);
-//         sethotels(res.data);
-//         setphotos1(res.data.HotelImages);
-//         setaddress1(res.data.Address);
-//         setroom1(res.data.SingleRooms["RoomType"]);
-//         // console.log(photos1);
-//         // console.log(address1);
-//         // console.log(res.data.Address);
-//         // console.log(res.data.Address.City);
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   });
+
 
   const handleOpen = (i) => {
     setSlideNumber(i);
@@ -92,22 +72,22 @@ console.log(hotelll);
     let newSlideNumber;
 
     if (direction === 'l') {
-      newSlideNumber = slideNumber === 0 ? hotelll.HotelImages.length-1 : slideNumber - 1;
+      newSlideNumber = slideNumber === 0 ? hotelll.HotelImages.length - 1 : slideNumber - 1;
     } else {
-      newSlideNumber = slideNumber === hotelll.HotelImages.length-1 ? 0 : slideNumber + 1;
+      newSlideNumber = slideNumber === hotelll.HotelImages.length - 1 ? 0 : slideNumber + 1;
     }
 
     setSlideNumber(newSlideNumber);
   };
-const handleClick = () => {
-  setOpenModal(true)
-}
+  const handleClick = () => {
+    setOpenModal(true)
+  }
   return (
-    
+
     <div>
-      
+
       <Navbar />
-      
+
       <Header type="list" />
       <div className="hotelContainer">
         {open && (
@@ -198,50 +178,50 @@ const handleClick = () => {
           </div>
         </div>
         <div>
-        <table class="table table-dark table-striped">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">RoomType</th>
-      <th scope="col">Room Size</th>
-      <th scope="col">BedType</th>
-    </tr>
-  </thead>
-  
-                     
-                     
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      {/* <td> {hotels.SingleRooms.BedType}</td> */}
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      {/* <td> {hotels.DoubleRooms.BedType}</td> */}
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      {/* <td>  {hotels.TripleRooms.BedType}</td> */}
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
+          <table class="table table-dark table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">RoomType</th>
+                <th scope="col">Room Size</th>
+                <th scope="col">BedType</th>
+              </tr>
+            </thead>
+
+
+
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                {/* <td> {hotels.SingleRooms.BedType}</td> */}
+                <td>Otto</td>
+                <td>@mdo</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                {/* <td> {hotels.DoubleRooms.BedType}</td> */}
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                {/* <td>  {hotels.TripleRooms.BedType}</td> */}
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td colspan="2">Larry the Bird</td>
+                <td>@twitter</td>
+              </tr>
+            </tbody>
+          </table>
 
         </div>
         <MailList />
         <Footer />
       </div>
-      {openModal && <Reserve setOpen={setOpenModal} hotelId={id}/>} 
+      {openModal && <Reserve setOpen={setOpenModal} hotelId={id} />}
     </div>
   );
 };

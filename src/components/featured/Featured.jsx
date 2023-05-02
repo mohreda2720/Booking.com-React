@@ -21,7 +21,7 @@ const Featured = () => {
       <>
       <div className="d-flex ">
                 {hotels.map(function (allhotels) {
-                    return <div key={allhotels.name}>
+                    return <div key={allhotels._id}>
               <div className="featuredItem  ">
           <img
           className=" m-4 featuredImg" variant="top"

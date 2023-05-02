@@ -7,7 +7,8 @@ import RegisterComponent from './pages/register/Register';
 import LoginComponent from './pages/login/Login';
 import MyWishList from "./pages/myWishList/myWishList"
 import Hotelsbycity from "./pages/hotelsbycity/hotelsbycity"
-
+import Payment from './components/payment/Payment';
+import Activities from "./pages/activities/activities"
 
 
 function App() {
@@ -22,6 +23,8 @@ function App() {
         <Route path="/hotels/:id" element={<Hotel />} />
         <Route path="/MyWishList" element={<MyWishList />} />
         <Route path="/hotelsbycity" element={<Hotelsbycity />}></Route>
+        <Route path="/Payment/:reservationDataStr" element={<  Payment />}></Route>
+<Route path="/activities" element={<  Activities />}></Route>
 
       </Routes>
     </BrowserRouter>

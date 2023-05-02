@@ -12,11 +12,23 @@ export function register(userData) {
     }
 }
 
-export function loginUser(user) {
-    return {
-        type: "LOGIN_USER",
-        payload: user,
-    };
+export function loginUser(userData, user) {
+
+    return (dispatch) => {
+        return axiosConfig.post(`/users/login`,userData).then((res) => {
+            dispatch({ type: "LOGIN_USER", payload: {token: res} })
+            localStorage.setItem('token',res.data)
+            localStorage.setItem('loggedUser', user);
+        })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+
+    // return {
+    //     type: "LOGIN_USER",
+    //     payload: {user, res},
+    // };
 }
 
 

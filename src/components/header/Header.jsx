@@ -9,7 +9,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./header.css";
 import { DateRange } from "react-date-range";
-import { useState } from "react";
+import { useEffect,useState } from "react";
 import { useTranslation } from "react-i18next";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
@@ -17,18 +17,31 @@ import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import changeHeart from "../../store/actions/heartToggleAction";
-import { useSelector } from "react-redux";
+import { useSelector, } from "react-redux";
+
 const Header = ({ type }) => {
+  
+
+  useEffect(() => {
+    setRender((prev) => !prev);
+  },[]);
+  
+  
   const [destination, setDestination] = useState("");
   const [openDate, setOpenDate] = useState(false);
+  const [render, setRender] = useState(false);
+  const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
   const [date, setDate] = useState([
     {
       startDate: new Date(),
-      endDate: new Date(),
+      // endDate: (new Date()),
+      endDate: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
       key: "selection",
     },
   ]);
-  const favMovie = useSelector((state) => state.haertToggleReducer.favMovies);
+  // const favMovie = useSelector((state) => state.haertToggleReducer.favMovies);
+  
   const [openOptions, setOpenOptions] = useState(false);
   const [options, setOptions] = useState({
     adult: 1,
@@ -69,7 +82,7 @@ const Header = ({ type }) => {
           <div className="headerListItem active">
             <FontAwesomeIcon icon={faBed} />
 
-            <span>Stays</span>
+           
             <span>{t("Stays")}</span>
           </div>
           <div className="headerListItem">
@@ -89,10 +102,10 @@ const Header = ({ type }) => {
             <span>{t("Airport taxis")}</span>
           </div>
           <Link   to={`/MyWishList`}>
-         <button type="button" class="btn btn-primary position-relative">
-         Favorites
+         <button  type="button" class="btn btn-primary position-relative">
+         Favorites 
   <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-  {favMovie.length} 
+  {favorites.length } 
     <span class="visually-hidden">Favorites</span>
   </span>
 </button>
@@ -138,6 +151,7 @@ const Header = ({ type }) => {
                     ranges={date}
                     className="date"
                     minDate={new Date()}
+                   
                   />
                 )}
               </div>
