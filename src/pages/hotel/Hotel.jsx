@@ -1,45 +1,47 @@
-import './hotel.css';
-import Navbar from '../../components/navbar/Navbar';
-import Header from '../../components/header/Header';
-import MailList from '../../components/mailList/MailList';
-import Footer from '../../components/footer/Footer';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import "./hotel.css";
+import Navbar from "../../components/navbar/Navbar";
+import Header from "../../components/header/Header";
+import MailList from "../../components/mailList/MailList";
+import Footer from "../../components/footer/Footer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faWifi,
+  faFan,
+  faBanSmoking,
+  faSquareParking,
   faCircleArrowLeft,
   faCircleArrowRight,
   faCircleXmark,
   faLocationDot,
-} from '@fortawesome/free-solid-svg-icons';
+} from "@fortawesome/free-solid-svg-icons";
 import { DateRange } from "react-date-range";
 import { useLocation } from "react-router-dom";
 import SearchItem from "../../components/searchItem/SearchItem";
 
 import { useDispatch, useSelector } from "react-redux";
-import React, { useEffect, useState } from 'react';
-import axiosConfig from './../../axiosConfig/axiosConfig';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import axiosConfig from "./../../axiosConfig/axiosConfig";
+import { useParams } from "react-router-dom";
 import Reserve from "../../components/reserve/Reserve";
 import searchItem from "../../components/searchItem/SearchItem";
-import sethotel from '../../store/actions/action';
+import sethotel from "../../store/actions/action";
+import { useTranslation } from "react-i18next";
 
 const Hotel = () => {
-   const hotelllll = useSelector((state) => state.hotels.gethotels);
+  const { t } = useTranslation();
+
+  const hotelllll = useSelector((state) => state.hotels.gethotels);
   // console.log(hotelllll);
-  
 
   // const [dates, setDate] = useState(location.state.date)
 
-  
-    const location = useLocation();
+  const location = useLocation();
 
-    //  const [dates, setDate] = useState(location.state.date)
-    const [openDate, setOpenDate] = useState(false)
-    // const [options, setOptions] = useState(location.state.options)
-    // const hotelsByCity = useSelector((state) => state.search.hotelsByCity)
-    // const dispatch = useDispatch()
-
-  
-
+  //  const [dates, setDate] = useState(location.state.date)
+  const [openDate, setOpenDate] = useState(false);
+  // const [options, setOptions] = useState(location.state.options)
+  // const hotelsByCity = useSelector((state) => state.search.hotelsByCity)
+  // const dispatch = useDispatch()
 
   const [hotels, sethotels] = useState([]);
   const { id } = useParams();
@@ -47,32 +49,11 @@ const Hotel = () => {
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [photos1, setphotos1] = useState([]);
-  const [address1, setaddress1] = useState({});
+  // const [address1, setaddress1] = useState({});
   const [room1, setroom1] = useState([]);
- 
-  const [date, setDate] = useState(location.state.date)
 
-  const hotelll = hotelllll.find((hotel) => hotel._id == `${id}`)
-//   useEffect(() => {
-//     const hotelll = hotelllll.find((hotel) => hotel._id == `${id}`)
-console.log(hotelll);
-//     axiosConfig
-//       .get(`hotels/${id}`)
-//       .then((res) => {
-//         // console.log(res.data);
-//         sethotels(res.data);
-//         setphotos1(res.data.HotelImages);
-//         setaddress1(res.data.Address);
-//         setroom1(res.data.SingleRooms["RoomType"]);
-//         // console.log(photos1);
-//         // console.log(address1);
-//         // console.log(res.data.Address);
-//         // console.log(res.data.Address.City);
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   });
+  const [date, setDate] = useState(location.state.date);
+  const hotelll = hotelllll.find((hotel) => hotel._id == `${id}`);
 
   const handleOpen = (i) => {
     setSlideNumber(i);
@@ -91,23 +72,23 @@ console.log(hotelll);
   const handleMove = (direction) => {
     let newSlideNumber;
 
-    if (direction === 'l') {
-      newSlideNumber = slideNumber === 0 ? hotelll.HotelImages.length-1 : slideNumber - 1;
+    if (direction === "l") {
+      newSlideNumber =
+        slideNumber === 0 ? hotelll.HotelImages.length - 1 : slideNumber - 1;
     } else {
-      newSlideNumber = slideNumber === hotelll.HotelImages.length-1 ? 0 : slideNumber + 1;
+      newSlideNumber =
+        slideNumber === hotelll.HotelImages.length - 1 ? 0 : slideNumber + 1;
     }
 
     setSlideNumber(newSlideNumber);
   };
-const handleClick = () => {
-  setOpenModal(true)
-}
+  const handleClick = () => {
+    setOpenModal(true);
+  };
   return (
-    
     <div>
-      
       <Navbar />
-      
+
       <Header type="list" />
       <div className="hotelContainer">
         {open && (
@@ -120,7 +101,7 @@ const handleClick = () => {
             <FontAwesomeIcon
               icon={faCircleArrowLeft}
               className="arrow"
-              onClick={() => handleMove('l')}
+              onClick={() => handleMove("l")}
             />
             <div className="sliderWrapper">
               <img
@@ -132,24 +113,47 @@ const handleClick = () => {
             <FontAwesomeIcon
               icon={faCircleArrowRight}
               className="arrow"
-              onClick={() => handleMove('r')}
+              onClick={() => handleMove("r")}
             />
           </div>
         )}
         <div className="hotelWrapper">
-          <button className="bookNow">Reserve or Book Now!</button>
-          <h1 className="hotelTitle"> {hotelll.name} </h1>
+          <button className="bookNow">{t("Reserve or Book Now!")}</button>
+          <button className="bookNow">{t("Reserve or Book Now!")}</button>
+          <h1 className="hotelTitle">
+            {" "}
+            {t("hotelllName", { name: hotelll.name })}
+          </h1>
           <div className="hotelAddress">
             <FontAwesomeIcon icon={faLocationDot} />
-            <span> {hotelll.Address.Street},</span>
-            <span> {hotelll.Address.City},</span>
-            <span> {hotelll.Address.Country}</span>
+            <span>
+              {" "}
+              {t("hotelllStreet", {
+                Street: hotelll.Street,
+                ARStreet: hotelll.ARStreet,
+              })}
+              ,
+            </span>
+            <span>
+              {" "}
+              {t("hotelllCity", { City: hotelll.City, ARCity: hotelll.ARCity })}
+              ,
+            </span>
+            <span>
+              {" "}
+              {t("hotelllCountry", {
+                Country: hotelll.Country,
+                ARCountry: hotelll.ARCountry,
+              })}
+            </span>
           </div>
           <span className="hotelDistance">
-            Excellent location – 500m from center
+            {t("Excellent location – 500m from center")}
           </span>
           <span className="hotelPriceHighlight">
-            Book a stay over $114 at this property and get a free airport taxi
+            {t(
+              "Book a stay over $114 at this property and get a free airport taxi"
+            )}
           </span>
           <div className="hotelImages">
             {hotelll.HotelImages.map((photo, i) => (
@@ -163,85 +167,88 @@ const handleClick = () => {
               </div>
             ))}
           </div>
-          <div className="hotelDetails">
+          <div className="hotelDetails mt-5">
             <div className="hotelDetailsTexts">
               <h1 className="hotelTitle">
-                {hotelll.name} Stay in the heart of City
+                {t("hotelllName", { name: hotelll.name })},{" "}
+                {t("Stay in the heart of City")}
               </h1>
               <p className="hotelDesc">
-                {' '}
-                {hotelll.HotelDescription}
-                {/* Located a 5-minute walk from St. Florian's Gate in Krakow, Tower
-                Street Apartments has accommodations with air conditioning and
-                free WiFi. The units come with hardwood floors and feature a
-                fully equipped kitchenette with a microwave, a flat-screen TV,
-                and a private bathroom with shower and a hairdryer. A fridge is
-                also offered, as well as an electric tea pot and a coffee
-                machine. Popular points of interest near the apartment include
-                Cloth Hall, Main Market Square and Town Hall Tower. The nearest
-                airport is John Paul II International Kraków–Balice, 16.1 km
-                from Tower Street Apartments, and the property offers a paid
-                airport shuttle service. */}
+                {" "}
+                {hotelll.HotelDescription}{" "}
+                {t("hotelllDescription", {
+                  HotelDescription: hotelll.HotelDescription,
+                  ARHotelDescription: hotelll.ARHotelDescription,
+                })}
               </p>
+              <h5 className="mt-5">
+                {t("hotelllName", { name: hotelll.name })},{" "}
+                {t("has been welcoming Booking.com guests since Nov17, 2009")}
+              </h5>
+              <h6 className="my-5">
+                {t(
+                  "Distance in property description is calculated using ©OpenStreetMap"
+                )}
+              </h6>
+              <h5 className="text-bold ">{t("Most popular facilities")}</h5>
+              <ul className="d-flex">
+                <li>
+                  {" "}
+                  <FontAwesomeIcon
+                    className="me-2"
+                    icon={faWifi}
+                    style={{ color: "#1db167" }}
+                  />{" "}
+                  {hotelll.Facilities.MostPopularFacilities[0]}
+                </li>
+                <li>
+                  {" "}
+                  <FontAwesomeIcon
+                    className="me-2"
+                    icon={faFan}
+                    style={{ color: "#1db167" }}
+                  />{" "}
+                  {hotelll.Facilities.MostPopularFacilities[1]}
+                </li>
+                <li>
+                  {" "}
+                  <FontAwesomeIcon
+                    className="me-2"
+                    icon={faBanSmoking}
+                    style={{ color: "#1db167" }}
+                  />{" "}
+                  {hotelll.Facilities.MostPopularFacilities[2]}
+                </li>
+                <li>
+                  {" "}
+                  <FontAwesomeIcon
+                    className="me-2"
+                    icon={faSquareParking}
+                    style={{ color: "#1db167" }}
+                  />{" "}
+                  {hotelll.Facilities.MostPopularFacilities[3]}
+                </li>
+              </ul>
             </div>
             <div className="hotelDetailsPrice">
-              <h1>Perfect for a 9-night stay!</h1>
+              <h1>{t("Perfect for a 9-night stay!")}</h1>
               <span>
-                Located in the real heart of Krakow, this property has an
-                excellent location score of 9.8!
+                {t(
+                  "Located in the real heart of Krakow, this property has an excellent location score of 9.8!"
+                )}
               </span>
               <h2>
                 <b> ${hotelll.SSRoomPrice}</b> (9 nights)
               </h2>
-              <button onClick={handleClick}>Reserve or Book Now!</button>
+              <button onClick={handleClick}>{t("Reserve or Book Now!")}</button>
             </div>
           </div>
         </div>
-        <div>
-        <table class="table table-dark table-striped">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">RoomType</th>
-      <th scope="col">Room Size</th>
-      <th scope="col">BedType</th>
-    </tr>
-  </thead>
-  
-                     
-                     
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      {/* <td> {hotels.SingleRooms.BedType}</td> */}
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      {/* <td> {hotels.DoubleRooms.BedType}</td> */}
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      {/* <td>  {hotels.TripleRooms.BedType}</td> */}
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
 
-        </div>
         <MailList />
         <Footer />
       </div>
-      {openModal && <Reserve setOpen={setOpenModal} hotelId={id}/>} 
+      {openModal && <Reserve setOpen={setOpenModal} hotelId={id} />}
     </div>
   );
 };
