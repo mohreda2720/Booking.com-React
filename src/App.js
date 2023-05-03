@@ -8,6 +8,7 @@ import LoginComponent from './pages/login/Login';
 import MyWishList from "./pages/myWishList/myWishList"
 import Hotelsbycity from "./pages/hotelsbycity/hotelsbycity"
 import Activities from "./pages/activities/activities";
+import Tours from "./pages/tours/tours";
 import Payment from './components/payment/Payment';
 import BookingProcess from './components/bookingProcess/BookingProcess';
 
@@ -27,6 +28,9 @@ function App() {
         <Route path="/activities" element={<  Activities />}></Route>
         <Route path="/Payment/:bookingDetailsStr" element={<  Payment />}></Route>
         <Route path="/BookingProcess/:reservationDataStr" element={<BookingProcess />}></Route>
+        <Route path="/tours" element={<  Tours />}></Route>
+        <Route path="/Payment" element={<  Payment />}></Route>
+
       </Routes>
     </BrowserRouter>
 
