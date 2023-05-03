@@ -6,15 +6,17 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import setcity from '../../store/actions/citiesAction';
 
-import { Link } from 'react-router-dom';
-
 const PropertyList = () => {
   const location = useLocation();
-  // const [destination1, setDestination] = useState('');
+  const [date, setDate] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
+      key: 'selection',
+    },
+  ]);
   const [cityId, setcitId] = useState('');
-  const [destination1, setDestination] = useState(
-    location.state?.destination1 || ''
-  );
+  const [destination, setDestination] = useState(location.state?.destination);
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const cities = useSelector((state) => state.cities.getcities);
@@ -25,9 +27,9 @@ const PropertyList = () => {
 
   const navigate = useNavigate();
   const handleSearch = () => {
-    console.log(destination1);
+    console.log(destination);
 
-    navigate('/hotelsbycity', { state: { destination1 } });
+    navigate('/hotelsbycity', { state: { destination, date } });
   };
 
   const seachactivity = () => {
