@@ -9,7 +9,7 @@ import MyWishList from "./pages/myWishList/myWishList"
 import Hotelsbycity from "./pages/hotelsbycity/hotelsbycity"
 import Activities from "./pages/activities/activities";
 import Payment from './components/payment/Payment';
-import BookingProcess from './components/BookingProcess/BookingProcess';
+import BookingProcess from './components/bookingProcess/BookingProcess';
 
 
 function App() {
@@ -25,8 +25,8 @@ function App() {
         <Route path="/MyWishList" element={<MyWishList />} />
         <Route path="/hotelsbycity" element={<Hotelsbycity />}></Route>
         <Route path="/activities" element={<  Activities />}></Route>
-        <Route path="/Payment" element={<  Payment />}></Route>
-        <Route path="/BookingProcess/:reservationDataStr" element= {<BookingProcess/>}></Route>
+        <Route path="/Payment/:bookingDetailsStr" element={<  Payment />}></Route>
+        <Route path="/BookingProcess/:reservationDataStr" element={<BookingProcess />}></Route>
       </Routes>
     </BrowserRouter>
 

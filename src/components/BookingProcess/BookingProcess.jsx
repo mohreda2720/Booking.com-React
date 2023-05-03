@@ -14,25 +14,26 @@ import { DateRange } from "react-date-range";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import axiosConfig from "../../axiosConfig/axiosConfig";
+import postReservation from "../../store/actions/reservation";
+
 
 const BookingProcess = () => {
-  // const [reservation, setReservation] = useState({
-  //   hotelData: "",
-  //   checkInDate: "",
-  //   checkOutDate: "",
-  //   totalCost: "",
-  //   customerName: "",
-  //   customerEmail: "",
-  //   paymentStatus: "",
-  //   paymentId: "",
-  // })
-
+  const [reservation, setReservation] = useState({
+    hotelData: "",
+    checkInDate: "",
+    checkOutDate: "",
+    totalCost: "",
+    customerName: "",
+    customerEmail: "",
+    paymentStatus: "",
+    paymentId: "",
+  })
   const { reservationDataStr } = useParams();
   const reservationData = JSON.parse(decodeURIComponent(reservationDataStr));
   const id = reservationData.hotelId;
   const date = reservationData.date;
   const selectedRooms = reservationData.rooms;
-  const location=useLocation();
+  const location = useLocation();
   console.log(location);
   const [REdates, setDate] = useState(location.state.dates);
   console.log(REdates);
@@ -42,11 +43,23 @@ const BookingProcess = () => {
 
   const dispatch = useDispatch();
   const theHotel = useSelector((state) => state.getoneHotel.getonehotel);
+  //const bookingData = useSelector((state) => state.reservations.reservation)
+  // const bookingId = bookingData._id;
+  // const bookingCost = bookingData.totalCost;
+
+  const bookingId = localStorage.getItem('reservId');
+  const bookingCost = localStorage.getItem('totalPrice')
+  
+  const bookingDetails = { bookingId: bookingId, bookingCost: bookingCost };
+
+  const bookingDetailsStr = encodeURIComponent(JSON.stringify(bookingDetails));
+
 
   useEffect(() => {
     dispatch(getonehotel(id));
-  
+
   }, []);
+
   const navigate = useNavigate();
 
   const startdate = date[0].startDate;
@@ -59,9 +72,17 @@ const BookingProcess = () => {
 
   const currentUser = localStorage.getItem("loggedUser");
   const userObject = JSON.parse(currentUser);
-  const useremail = userObject.userEmail;
-  const userimage = userObject.userImg;
-  const userName = userObject.userName;
+
+  let useremail = "";
+  let userimage = "";
+  let userName = "";
+
+  if (currentUser) {
+    useremail = userObject.userEmail;
+    userimage = userObject.userImg;
+    userName = userObject.userName;
+  }
+
   const [userData, setUserData] = useState({
     useremail: useremail,
     userName: userName,
@@ -75,15 +96,15 @@ const BookingProcess = () => {
       dates.push(new Date(date).getTime());
       date.setDate(date.getDate() + 1);
     }
- 
+
     return dates;
-   
+
   };
 
   const alldates = getDatesInRange(REdates[0].startDate, REdates[0].endDate);
 
-const totalCost = theHotel.SSRoomPrice * daysDif;
- 
+  const totalCost = theHotel.SSRoomPrice * daysDif;
+
 
   const handleClick = async () => {
     try {
@@ -91,34 +112,34 @@ const totalCost = theHotel.SSRoomPrice * daysDif;
         selectedRooms.map((roomId) => {
           const res = axiosConfig.put(`hotels/availability/${roomId}`, {
             dates: alldates,
-
           });
           return res.data;
         })
       );
-    return await Promise.all(axiosConfig.post(`booking`,{
+      const reservation = {
         hotelData: id,
         totalCost: totalCost,
-        customerName :userData.userName ,
+        customerName: userData.userName,
         customerEmail: userData.useremail,
         //hotelName: { type: String, required: true },
-        // checkInDate: { type: Date, required: true },
-        // checkOutDate: { type: Date, required: true },
+        //checkInDate: { type: Date, required: true },
+        //checkOutDate: { type: Date, required: true },
         //customerMobDile: { type: Number, required: true },
-      }));
-      // const reservationDataStr = encodeURIComponent(JSON.stringify(reservationData));
-    
-      navigate(`/Payment`)
-      // navigate(`/Payment/${reservationDataStr}`)
+      };
+      dispatch(postReservation(reservation));
+      console.log(bookingDetails);
+      navigate(`/payment/${bookingDetailsStr}`)
     } catch (err) { }
-
   };
-  
+
+
+
+
 
   return (
     <>
-    <Navbar></Navbar>
-    <br />
+      <Navbar></Navbar>
+      <br />
       <div className="container">
         <div className="row">
           <div className="col-4">
@@ -169,9 +190,9 @@ const totalCost = theHotel.SSRoomPrice * daysDif;
             <div class="card">Card 1</div>
 
             <div class="card">
-                <h5>Good to Know</h5>
+              <h5>Good to Know</h5>
               <div>
-                
+
                 <FontAwesomeIcon
                   icon={faCircleCheck}
                   style={{ color: "#18c601", margin: "1px" }}
@@ -179,13 +200,13 @@ const totalCost = theHotel.SSRoomPrice * daysDif;
                 You’ll get 2 entire apartments all to yourself!
               </div>
               <div>
-              <FontAwesomeIcon
+                <FontAwesomeIcon
                   icon={faCircleCheck}
                   style={{ color: "#18c601", margin: "1px" }}
                 />
                 Congrats! You picked the at CARE Holiday
                 Homes Apartments Barsha Heights.
-                
+
               </div>
             </div>
 
@@ -206,27 +227,27 @@ const totalCost = theHotel.SSRoomPrice * daysDif;
             </div>
             <div class="card ">
               <Form>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-        <Form.Label>Your Name </Form.Label>
+                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                  <Form.Label>Your Name </Form.Label>
 
-        <Form.Control className="theformI" value={userData.userName} type="text" placeholder="name@example.com"  onChange={(e) =>
-              setUserData({ ...userData, userName: e.target.value })
-            } /> </Form.Group>
-      <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-        <Form.Label>Email address</Form.Label>
+                  <Form.Control className="theformI" value={userData.userName} type="text" placeholder="Name" onChange={(e) =>
+                    setUserData({ ...userData, userName: e.target.value })
+                  } /> </Form.Group>
+                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                  <Form.Label>Email address</Form.Label>
 
-        <Form.Control className="theformI" value={userData.useremail} type="email" placeholder="name@example.com"  onChange={(e) =>
-              setUserData({ ...userData, useremail: e.target.value })
-            } /> </Form.Group>
-      <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-        <Form.Label>Example text area</Form.Label>
-        <Form.Control className="theformI" as="textarea" rows={3} />
-      </Form.Group>
-      <Button onClick={handleClick}  variant="primary" id="lButton">
-          submit
-        </Button>
-    </Form>
-              
+                  <Form.Control className="theformI" value={userData.useremail} type="email" placeholder="name@example.com" onChange={(e) =>
+                    setUserData({ ...userData, useremail: e.target.value })
+                  } /> </Form.Group>
+                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                  <Form.Label>Example text area</Form.Label>
+                  <Form.Control className="theformI" as="textarea" rows={3} />
+                </Form.Group>
+                <Button onClick={handleClick} variant="primary" id="lButton">
+                  submit
+                </Button>
+              </Form>
+
             </div>
             <div class="card">Card 5</div>
             <button></button>

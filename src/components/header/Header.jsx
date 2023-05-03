@@ -41,7 +41,7 @@ const Header = ({ type }) => {
       key: "selection",
     },
   ]);
-  // const favMovie = useSelector((state) => state.haertToggleReducer.favMovies);
+   const favMovie = useSelector((state) => state.haertToggleReducer.favMovies);
   
   const [openOptions, setOpenOptions] = useState(false);
   const [options, setOptions] = useState({
