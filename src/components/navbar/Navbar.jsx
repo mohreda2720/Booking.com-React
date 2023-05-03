@@ -8,9 +8,16 @@ import { BsGlobe } from "react-icons/bs";
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();
+  if (i18n.dir(i18n.language) === "rtl") {
+    document.getElementsByTagName("html")[0].setAttribute("dir", "rtl");
+  } else {
+    document.getElementsByTagName("html")[0].setAttribute("dir", "ltr");
+  }
   const navigate = useNavigate();
-  const location = useLocation();
-  const currentUser = localStorage.getItem("loggedUser");
+  const location = useLocation(); // get current location using useLocation()
+  // const currentUser = useSelector((state) => state.users.currentUser);
+  const currentUser = JSON.parse(localStorage.getItem("loggedUser"));
+
   const isLoggedIn = currentUser !== null;
   const dispatch = useDispatch();
 

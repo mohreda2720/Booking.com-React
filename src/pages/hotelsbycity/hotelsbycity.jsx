@@ -9,27 +9,67 @@ import searchByCity from '../../store/actions/searchAction';
 import { DateRange } from 'react-date-range';
 import { format } from 'date-fns';
 
+import { useNavigate } from 'react-router-dom';
+
+import changeHeart from '../../store/actions/heartToggleAction';
+import sethotel from '../../store/actions/action';
+
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 const Hotelsbycity = () => {
   const location = useLocation();
-  const [desnation1, setDestnation] = useState(location.state.destination1);
-  // const [date, setDate] = useState([
-  //   {
-  //     startDate: new Date(),
-  //     endDate: new Date(),
-  //     // endDate: new Date(new Date()),
-  //     key: "selection",
-  //   },
-  // ]);
+  const [date, setDate] = useState(location.state.date);
+ 
+  const [desnation, setDestnation] = useState(location.state.destination);
   const [options, setOptions] = useState(location.state.options);
   const [openDate, setOpenDate] = useState(false);
 
   const hotelsByCity = useSelector((state) => state.search.hotelsByCity);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(searchByCity(desnation1));
-  }, [desnation1]);
+  const likesEmoji = {
+    liked: <AiFillHeart />,
+    unliked: <AiOutlineHeart />,
+  };
 
+  const navigate = useNavigate();
+  const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+  const [Min, setMin] = useState(0);
+  const [Max, setMax] = useState(90000000000000000000000);
+
+  const [hearts, setHearts] = useState();
+  const [render, setRender] = useState();
+  useEffect(() => {
+    dispatch(searchByCity(desnation));
+    dispatch(sethotel());
+  });
+  const addToFavourites = (id, e) => {
+    if (addFav.includes(id)) {
+      e.target.innerHTML = likesEmoji.unliked;
+      setRender((prev) => !prev);
+      console.log("yes it's found");
+      const newFavArr = addFav.filter((item) => item !== id);
+      localStorage.setItem('favorites', JSON.stringify(newFavArr));
+      return dispatch(changeHeart(newFavArr));
+    } else {
+      e.target.innerHTML = likesEmoji.liked;
+      setRender((prev) => !prev);
+      console.log("no it's not found");
+      addFav.push(id);
+      localStorage.setItem('favorites', JSON.stringify(addFav));
+      return;
+    }
+  };
+
+  const heart = (id) => {
+    if (addFav.includes(id)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  useEffect(() => {
+    dispatch(searchByCity(desnation));
+  }, [desnation]);
   return (
     <div>
       <Navbar />
@@ -38,16 +78,16 @@ const Hotelsbycity = () => {
         <div className="listWrapper">
           <div className="listSearch">
             <h1 className="lsTitle">Search</h1>
-            <div className="lsItem">
+            <div className="">
               <label>Destination</label>
-              <input placeholder={desnation1} type="text" />
+              <input placeholder={desnation} type="text" />
             </div>
-            {/* <div className="lsItem">
+            <div className="">
               <label>Check-in Date</label>
               <span onClick={() => setOpenDate(!openDate)}>{`${format(
-                date.startDate,
+                date[0].startDate,
                 'MM/dd/yyyy'
-              )} to ${format(date.endDate, 'MM/dd/yyyy')}`}</span>
+              )} to ${format(date[0].endDate, 'MM/dd/yyyy')}`}</span>
               {openDate && (
                 <DateRange
                   onChange={(item) => setDate([item.selection])}
@@ -55,58 +95,105 @@ const Hotelsbycity = () => {
                   ranges={date}
                 />
               )}
-            </div> */}
-            <div className="lsItem">
+            </div>
+            <div className="">
               <label>Options</label>
               <div className="lsOptions">
                 <div className="lsOptionItem">
                   <span className="lsOptionText">
                     Min price <small>per night</small>
                   </span>
-                  <input type="number" className="lsOptionInput" />
                 </div>
+                <input
+                  type="number"
+                  placeholder="0"
+                  onChange={(e) => setMin(e.target.value)}
+                  className=""
+                  style={{
+                    outline: 'none',
+                    borderRadius: '6px',
+                    border:
+'none',
+                  }}
+                />
+
+                <div>your min. price : {Min}</div>
                 <div className="lsOptionItem">
                   <span className="lsOptionText">
                     Max price <small>per night</small>
                   </span>
-                  <input type="number" className="lsOptionInput" />
                 </div>
-                {/* <div className="lsOptionItem">
-                  <span className="lsOptionText">Adult</span>
-                  <input
-                    type="number"
-                    min={1}
-                    className="lsOptionInput"
-                    placeholder={options.adult}
-                  />
-                </div>
+                <input
+                  type="number"
+                  placeholder="0"
+                  onChange={(e) => setMax(e.target.value)}
+                  className=""
+                  style={{
+                    outline: 'none',
+                    borderRadius: '6px',
+                    border: 'none',
+                  }}
+                />
+
                 <div className="lsOptionItem">
-                  <span className="lsOptionText">Children</span>
-                  <input
-                    type="number"
-                    min={0}
-                    className="lsOptionInput"
-                    placeholder={options.children}
-                  />
+                  <span className="lsOptionText">Adult</span>
                 </div>
+                <input
+                  style={{
+                    outline: 'none',
+                    borderRadius: '6px',
+                    border: 'none',
+                  }}
+                  type="number"
+                  min={1}
+                  className=""
+                />
+                <div className="lsOptionItem">
+                  <span className="">Children</span>
+                </div>
+                <input
+                  style={{
+                    outline: 'none',
+                    borderRadius: '6px',
+                    border: 'none',
+                  }}
+                  type="number"
+                  min={0}
+                  className=""
+                />
                 <div className="lsOptionItem">
                   <span className="lsOptionText">Room</span>
-                  <input
-                    type="number"
-                    min={1}
-                    className="lsOptionInput"
-                    placeholder={options.room}
-                  />
-                </div> */}
+                </div>
+                <input
+                  style={{
+                    outline: 'none',
+                    borderRadius: '6px',
+                    border: 'none',
+                  }}
+                  type="number"
+                  min={1}
+                  className=""
+                />
               </div>
             </div>
-            <button>Search</button>
+
+            <br />
+
+            <button
+              style={{
+                backgroundColor: '#003580',
+                borderRadius: '6px',
+                border: 'none',
+              }}
+            >
+              Search
+            </button>
           </div>
           <div className="listResult">
-           <div>{hotelsByCity.length}</div>
-            {/* {hotelsByCity.map((hotel) => (
+            <div>{hotelsByCity.length}</div>
+            {hotelsByCity.map((hotel) => (
               <SearchItem hotel={hotel} key={hotel._id} />
-            ))} */}
+            ))}
           </div>
         </div>
       </div>
@@ -114,3 +201,4 @@ const Hotelsbycity = () => {
   );
 };
 export default Hotelsbycity;
+

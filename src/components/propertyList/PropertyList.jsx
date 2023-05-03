@@ -12,10 +12,15 @@ import { useTranslation } from "react-i18next";
 const PropertyList = () => {
   const { t } = useTranslation();
   const location = useLocation();
+  const [date, setDate] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
+      key: "selection",
+    },
+  ]);
   const [cityId, setcitId] = useState("");
-  const [destination1, setDestination] = useState(
-    location.state?.destination1 || ""
-  );
+  const [destination, setDestination] = useState(location.state?.destination);
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const cities = useSelector((state) => state.cities.getcities);
@@ -26,7 +31,9 @@ const PropertyList = () => {
 
   const navigate = useNavigate();
   const handleSearch = () => {
-    navigate("/hotelsbycity", { state: { destination1 } });
+    console.log(destination);
+
+    navigate("/hotelsbycity", { state: { destination, date } });
   };
 
   const seachactivity = () => {
