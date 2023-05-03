@@ -9,6 +9,7 @@ import MyWishList from "./pages/myWishList/myWishList"
 import Hotelsbycity from "./pages/hotelsbycity/hotelsbycity"
 import BookingProcess from './components/BookingProcess/BookingProcess';
 import Activities from "./pages/activities/activities";
+import Tours from "./pages/tours/tours";
 import Payment from './components/payment/Payment';
 
 
@@ -26,6 +27,7 @@ function App() {
         <Route path="/hotelsbycity" element={<Hotelsbycity />}></Route>
         <Route path="/BookingProcess/:reservationDataStr" element={<  BookingProcess />}></Route>
         <Route path="/activities" element={<  Activities />}></Route>
+        <Route path="/tours" element={<  Tours />}></Route>
         <Route path="/Payment" element={<  Payment />}></Route>
 
       </Routes>

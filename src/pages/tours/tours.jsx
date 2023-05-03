@@ -2,13 +2,14 @@ import getActivities from '../../store/actions/activities';
 
 /////
 import React, { useEffect, useState } from 'react';
-import './activities.css';
+import './tours.css';
 import Navbar from '../../components/navbar/Navbar';
 import Header from '../../components/header/Header';
 import { useLocation } from 'react-router-dom';
 import ActivityProperties from '../../components/activityProperties/activityProperties';
 import { useSelector, useDispatch } from 'react-redux';
 import searchByCity from '../../store/actions/searchAction';
+import TourProperties from "../../components/tourProperties/TourProperties";
 
 const Activities = () => {
   const location = useLocation();
@@ -35,7 +36,7 @@ const Activities = () => {
      
          
             <div className='ms-5'>
-            <ActivityProperties />
+            <TourProperties />
             </div>
             </>
   )
