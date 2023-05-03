@@ -6,7 +6,6 @@ import {
   faPerson,
   faPlane,
   faTaxi,
-  
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./header.css";
@@ -63,6 +62,12 @@ const Header = ({ type }) => {
 
   const handleSearch = () => {
     navigate("/hotels", { state: { destination, date, options } });
+  };
+  const activities = () => {
+    navigate("/activities", { state: { destination, date, options } });
+  };
+  const tours = () => {
+    navigate("/tours", { state: { destination, date, options } });
   };
 
   const changeLanguage = (language) => {

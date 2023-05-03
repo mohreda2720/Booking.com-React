@@ -27,12 +27,17 @@ const Navbar = () => {
     dispatch(logoutUser());
     navigate("/");
   };
+  const home = () => {
+    navigate("/");
+  };
   const changeLanguage = (language) => i18n.changeLanguage(language);
 
   return (
     <div className="navbarClass">
       <div className="navContainer">
-        <span className="logo">BOOKING</span>
+        <span className="logo" style={{ cursor: "pointer" }} onClick={home}>
+          BOOKING
+        </span>
         <div className="navItems d-flex align-items-center">
           {isLoggedIn ? (
             <>

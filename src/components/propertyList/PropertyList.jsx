@@ -42,6 +42,9 @@ const PropertyList = () => {
       navigate("/activities")
     );
   };
+  const seachtours = () => {
+    return axiosConfig.get(`/tours/searchcity/${cityId}`), navigate("/tours");
+  };
 
   return (
     <div className="pList">
@@ -70,12 +73,22 @@ const PropertyList = () => {
                       })}{" "}
                     </h1>
                     <h2>
-                      {t("hotelsCount", { count: city.hotelsCount })}{" "}
+                      {" "}
+                      <span
+                        onMouseOver={(e) => {
+                          setDestination(city.CityName), setcitId(city._id);
+                        }}
+                        onClick={handleSearch}
+                      >
+                        hotels: {city.hotelsCount}{" "}
+                      </span>
                       <span onClick={seachactivity}>
                         |{" "}
                         {t("activitiesCount", { count: city.activitiesCount })}{" "}
                       </span>
-                      | {t("toursCount", { count: city.activitiesCount })}{" "}
+                      <span onClick={seachtours}>
+                        | tours: {city.toursCount}{" "}
+                      </span>
                     </h2>
                   </div>
                 </div>
