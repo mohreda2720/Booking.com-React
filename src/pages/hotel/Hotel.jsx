@@ -5,41 +5,40 @@ import MailList from '../../components/mailList/MailList';
 import Footer from '../../components/footer/Footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
+  faWifi,
+  faFan,
+  faBanSmoking,
+  faSquareParking,
   faCircleArrowLeft,
   faCircleArrowRight,
   faCircleXmark,
   faLocationDot,
 } from '@fortawesome/free-solid-svg-icons';
-import { DateRange } from "react-date-range";
-import { useLocation } from "react-router-dom";
-import SearchItem from "../../components/searchItem/SearchItem";
+import { DateRange } from 'react-date-range';
+import { useLocation } from 'react-router-dom';
+import SearchItem from '../../components/searchItem/SearchItem';
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import axiosConfig from './../../axiosConfig/axiosConfig';
 import { useParams } from 'react-router-dom';
-import Reserve from "../../components/reserve/Reserve";
-import searchItem from "../../components/searchItem/SearchItem";
+import Reserve from '../../components/reserve/Reserve';
+import searchItem from '../../components/searchItem/SearchItem';
 import sethotel from '../../store/actions/action';
 
 const Hotel = () => {
   const hotelllll = useSelector((state) => state.hotels.gethotels);
   // console.log(hotelllll);
 
-
   // const [dates, setDate] = useState(location.state.date)
-
 
   const location = useLocation();
 
   //  const [dates, setDate] = useState(location.state.date)
-  const [openDate, setOpenDate] = useState(false)
+  const [openDate, setOpenDate] = useState(false);
   // const [options, setOptions] = useState(location.state.options)
   // const hotelsByCity = useSelector((state) => state.search.hotelsByCity)
   // const dispatch = useDispatch()
-
-
-
 
   const [hotels, sethotels] = useState([]);
   const { id } = useParams();
@@ -47,12 +46,11 @@ const Hotel = () => {
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [photos1, setphotos1] = useState([]);
-  const [address1, setaddress1] = useState({});
+  // const [address1, setaddress1] = useState({});
   const [room1, setroom1] = useState([]);
 
-  const [date, setDate] = useState(location.state.date)
-  const hotelll = hotelllll.find((hotel) => hotel._id == `${id}`)
-
+  const [date, setDate] = useState(location.state.date);
+  const hotelll = hotelllll.find((hotel) => hotel._id == `${id}`);
 
   const handleOpen = (i) => {
     setSlideNumber(i);
@@ -72,20 +70,20 @@ const Hotel = () => {
     let newSlideNumber;
 
     if (direction === 'l') {
-      newSlideNumber = slideNumber === 0 ? hotelll.HotelImages.length - 1 : slideNumber - 1;
+      newSlideNumber =
+        slideNumber === 0 ? hotelll.HotelImages.length - 1 : slideNumber - 1;
     } else {
-      newSlideNumber = slideNumber === hotelll.HotelImages.length - 1 ? 0 : slideNumber + 1;
+      newSlideNumber =
+        slideNumber === hotelll.HotelImages.length - 1 ? 0 : slideNumber + 1;
     }
 
     setSlideNumber(newSlideNumber);
   };
   const handleClick = () => {
-    setOpenModal(true)
-  }
+    setOpenModal(true);
+  };
   return (
-
     <div>
-
       <Navbar />
 
       <Header type="list" />
@@ -118,12 +116,14 @@ const Hotel = () => {
         )}
         <div className="hotelWrapper">
           <button className="bookNow">Reserve or Book Now!</button>
+          <button className="bookNow">Reserve or Book Now!</button>
           <h1 className="hotelTitle"> {hotelll.name} </h1>
           <div className="hotelAddress">
             <FontAwesomeIcon icon={faLocationDot} />
-            <span> {hotelll.Address.Street},</span>
-            <span> {hotelll.Address.City},</span>
-            <span> {hotelll.Address.Country}</span>
+            <span> {hotelll.Street},</span>
+            <span> {hotelll.City},</span>
+            <span> {hotelll.Country}</span>
+           
           </div>
           <span className="hotelDistance">
             Excellent location – 500m from center
@@ -143,26 +143,22 @@ const Hotel = () => {
               </div>
             ))}
           </div>
-          <div className="hotelDetails">
+          <div className="hotelDetails mt-5">
             <div className="hotelDetailsTexts">
               <h1 className="hotelTitle">
                 {hotelll.name} Stay in the heart of City
               </h1>
-              <p className="hotelDesc">
-                {' '}
-                {hotelll.HotelDescription}
-                {/* Located a 5-minute walk from St. Florian's Gate in Krakow, Tower
-                Street Apartments has accommodations with air conditioning and
-                free WiFi. The units come with hardwood floors and feature a
-                fully equipped kitchenette with a microwave, a flat-screen TV,
-                and a private bathroom with shower and a hairdryer. A fridge is
-                also offered, as well as an electric tea pot and a coffee
-                machine. Popular points of interest near the apartment include
-                Cloth Hall, Main Market Square and Town Hall Tower. The nearest
-                airport is John Paul II International Kraków–Balice, 16.1 km
-                from Tower Street Apartments, and the property offers a paid
-                airport shuttle service. */}
-              </p>
+              <p className="hotelDesc"> {hotelll.HotelDescription}</p>
+              <h5 className='mt-5'>{hotelll.name }has been welcoming Booking.com guests since Nov 17, 2009</h5>
+              <h6 className='my-5'>Distance in property description is calculated using © OpenStreetMap </h6>
+              <h5 className='text-bold '>Most popular facilities</h5>
+              <ul className='d-flex'>
+                <li> <FontAwesomeIcon className='me-2' icon={faWifi} style={{color: "#1db167",}} /> {hotelll.Facilities.MostPopularFacilities[0]}</li>
+                <li> <FontAwesomeIcon className='me-2' icon={faFan} style={{color: "#1db167",}} /> {hotelll.Facilities.MostPopularFacilities[1]}</li>
+                <li> <FontAwesomeIcon className='me-2' icon={faBanSmoking} style={{color: "#1db167",}} /> {hotelll.Facilities.MostPopularFacilities[2]}</li>
+                <li> <FontAwesomeIcon className='me-2' icon={faSquareParking} style={{color: "#1db167",}} /> {hotelll.Facilities.MostPopularFacilities[3]}</li>
+             
+              </ul>
             </div>
             <div className="hotelDetailsPrice">
               <h1>Perfect for a 9-night stay!</h1>
@@ -177,47 +173,7 @@ const Hotel = () => {
             </div>
           </div>
         </div>
-        <div>
-          <table class="table table-dark table-striped">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">RoomType</th>
-                <th scope="col">Room Size</th>
-                <th scope="col">BedType</th>
-              </tr>
-            </thead>
 
-
-
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                {/* <td> {hotels.SingleRooms.BedType}</td> */}
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                {/* <td> {hotels.DoubleRooms.BedType}</td> */}
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                {/* <td>  {hotels.TripleRooms.BedType}</td> */}
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-              </tr>
-            </tbody>
-          </table>
-
-        </div>
         <MailList />
         <Footer />
       </div>
@@ -227,3 +183,4 @@ const Hotel = () => {
 };
 
 export default Hotel;
+

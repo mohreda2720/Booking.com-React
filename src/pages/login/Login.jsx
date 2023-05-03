@@ -51,7 +51,7 @@ const LoginComponent = () => {
     <div id="appLogin">
       <Form onSubmit={handleLogin} id="login">
         <Form.Group className="mb-3" controlId="formBasicName" id="lContainer">
-          <Form.Label>Name</Form.Label>
+          <Form.Label>Email</Form.Label>
           <Form.Control
             type="text"
             placeholder="Enter name"

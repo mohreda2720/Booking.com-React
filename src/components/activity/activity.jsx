@@ -1,8 +1,8 @@
-import "./searchItem.css";
+import "./activity.css";
 import { Link } from 'react-router-dom'; 
 import { useNavigate } from 'react-router-dom'; 
 
-import { useLocation } from "react-router-dom"; 
+// import { useLocation } from "react-router-dom"; 
 import { useSelector, useDispatch } from "react-redux";
 import changeHeart from "../../store/actions/heartToggleAction";
 import React, { useEffect, useState } from "react";
@@ -10,7 +10,7 @@ import sethotel from "../../store/actions/action";
 
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
-const SearchItem = ({ hotel }) => {
+const Activity = ({ hotel }) => {
   useEffect(() => {
     dispatch(sethotel());
   });
@@ -18,28 +18,16 @@ const SearchItem = ({ hotel }) => {
     liked: <AiFillHeart />,
     unliked: <AiOutlineHeart />,
   };
-  const location = useLocation(); 
-  const [date, setDate] = useState(location.state.date) 
 
-
+  // const location = useLocation(); 
   
 
-  const [desnation, setDestnation] = useState(location.state.destination) 
-  const addFav = useSelector((state) => state.haertToggleReducer.favMovies);
-  const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
-  function dayDifference(date1, date2) {
-    const timeDiff = Math.abs(date2.getTime() - date1.getTime());
-
-    // console.log(getTime(date1));
-    const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
-    return diffDays;
-  }
-  
-  const days = dayDifference(date[0].endDate, date[0].startDate);
-
+  // const [desnation, setDestnation] = useState(location.state.destination) 
+  const addFav = useSelector((state) => state.haertToggleReducer.favMovies);addFav
+  // const [date, setDate] = useState(location.state.date) 
   
   const [openDate, setOpenDate] = useState(false) 
-  const [options, setOptions] = useState(location.state.options) 
+  // const [options, setOptions] = useState(location.state.options) 
   const hotelsByCity = useSelector((state) => state.search.hotelsByCity) 
   const dispatch = useDispatch()
   const navigate = useNavigate();
@@ -78,7 +66,7 @@ const SearchItem = ({ hotel }) => {
   return (
     <div className="searchItem">
       {/* console.log(favMovie); */}
-      
+      <div> </div>
       <Link
         to={`/hotels/${hotel._id}`}
         className="text-dark"
@@ -117,7 +105,7 @@ const SearchItem = ({ hotel }) => {
           <button>8.9</button>
         </div>
         <div className="siDetailsTexts">
-          <span className="siPrice">{hotel.SSRoomPrice * days}</span>
+          <span className="siPrice">$123</span>
           <span className="siTaxOp">Includes taxes and fees</span>
 
           {/* <Link
@@ -142,4 +130,4 @@ const SearchItem = ({ hotel }) => {
   );
 };
 
-export default SearchItem;
+export default Activity;

@@ -56,9 +56,11 @@ const Reserve = ({ setOpen, hotelId }) => {
       dates.push(new Date(date).getTime());
       date.setDate(date.getDate() + 1);
     }
+    console.log(dates);
     return dates;
+    
   };
-
+console.log(location.state.date);
   const alldates = getDatesInRange(dates[0].startDate, dates[0].endDate);
 
   const isAvailable = (roomNumber) => {
@@ -80,24 +82,24 @@ const Reserve = ({ setOpen, hotelId }) => {
         : selectedRooms.filter((item) => item !== value)
     );
   };
-
+console.log(selectedRooms);
   const navigate = useNavigate();
 
   const handleClick = async () => {
     try {
-      await Promise.all(
-        selectedRooms.map((roomId) => {
-          const res = axiosConfig.put(`hotels/availability/${roomId}`, {
-            dates: alldates,
-          });
-          return res.data;
-        })
-      );
+      // await Promise.all(
+      //   selectedRooms.map((roomId) => {
+      //     const res = axiosConfig.put(`hotels/availability/${roomId}`, {
+      //       dates: alldates,
+      //     });
+      //     return res.data;
+      //   })
+      // );
       setOpen(false);
       const reservationData = { hotelId: id, rooms: selectedRooms, date: recievedDates };
       console.log(reservationData);
       const reservationDataStr = encodeURIComponent(JSON.stringify(reservationData));
-      navigate(`/booking/${reservationDataStr}`)
+      navigate(`/BookingProcess/${reservationDataStr}`, { state:{ dates } })
     } catch (err) { }
   };
   return (
@@ -142,7 +144,7 @@ const Reserve = ({ setOpen, hotelId }) => {
         <button onClick={handleClick} className="rButton">
           Reserve Now!
         </button>
-        <Link to={`/booking/${dates}/${selectedRooms}/${id}`}>Go to Payment</Link>
+        <Link to={`/BookingProcess/${dates}/${selectedRooms}/${id}`}>Go to Payment</Link>
       </div>
     </div>
   );
