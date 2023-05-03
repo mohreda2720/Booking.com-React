@@ -11,6 +11,7 @@ import Activities from "./pages/activities/activities";
 import Tours from "./pages/tours/tours";
 import Payment from './components/payment/Payment';
 import BookingProcess from './components/BookingProcess/BookingProcess';
+import UserProfile from './components/userProfile/UserProfile';
 
 
 function App() {
@@ -30,7 +31,7 @@ function App() {
         <Route path="/BookingProcess/:reservationDataStr" element={<BookingProcess />}></Route>
         <Route path="/tours" element={<  Tours />}></Route>
         <Route path="/Payment" element={<  Payment />}></Route>
-
+        <Route path="/profile" element={<  UserProfile />}></Route>
       </Routes>
     </BrowserRouter>
 

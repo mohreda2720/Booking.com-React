@@ -49,9 +49,8 @@ const BookingProcess = () => {
 
   const bookingId = localStorage.getItem('reservId');
   const bookingCost = localStorage.getItem('totalPrice')
-  
-  const bookingDetails = { bookingId: bookingId, bookingCost: bookingCost };
 
+  const bookingDetails = { bookingId: bookingId, bookingCost: bookingCost };
   const bookingDetailsStr = encodeURIComponent(JSON.stringify(bookingDetails));
 
 
@@ -72,15 +71,30 @@ const BookingProcess = () => {
 
   const currentUser = localStorage.getItem("loggedUser");
   const userObject = JSON.parse(currentUser);
+  console.log(userObject._id)
+
+  // axiosConfig.get(`/users/${userId}`)
+  // .then((response) => {
+  //   const user = response.data;
+  //   console.log(user);
+  // })
+  // .catch((error) => {
+  //   console.error(error);
+  // });
+
+
+
 
   let useremail = "";
   let userimage = "";
   let userName = "";
+  let userId = "";
 
   if (currentUser) {
     useremail = userObject.userEmail;
     userimage = userObject.userImg;
     userName = userObject.userName;
+    userId = userObject._id;
   }
 
   const [userData, setUserData] = useState({
@@ -96,14 +110,22 @@ const BookingProcess = () => {
       dates.push(new Date(date).getTime());
       date.setDate(date.getDate() + 1);
     }
-
     return dates;
-
   };
 
   const alldates = getDatesInRange(REdates[0].startDate, REdates[0].endDate);
-
   const totalCost = theHotel.SSRoomPrice * daysDif;
+
+  // const currentUser = localStorage.getItem("loggedUser");
+  // const userObject = JSON.parse(currentUser);
+
+  // .then(res => {
+  //   const user = res.data;
+  //   console.log(user);
+  // })
+  // .catch(error => {
+  //   console.log(error);
+  // });
 
 
   const handleClick = async () => {
@@ -121,6 +143,7 @@ const BookingProcess = () => {
         totalCost: totalCost,
         customerName: userData.userName,
         customerEmail: userData.useremail,
+        customerId: userObject._id,
         //hotelName: { type: String, required: true },
         //checkInDate: { type: Date, required: true },
         //checkOutDate: { type: Date, required: true },

@@ -49,9 +49,9 @@ const Reserve = ({ setOpen, hotelId }) => {
     }
     console.log(dates);
     return dates;
-    
+
   };
-console.log(location.state.date);
+  console.log(location.state.date);
   const alldates = getDatesInRange(dates[0].startDate, dates[0].endDate);
 
   const isAvailable = (roomNumber) => {
@@ -60,6 +60,9 @@ console.log(location.state.date);
     );
     return !isFound;
   };
+
+  
+
 
   const handleSelect = (e) => {
     const checked = e.target.checked;
@@ -72,7 +75,7 @@ console.log(location.state.date);
     );
     console.log(selectedRooms)
   };
-console.log(selectedRooms);
+  console.log(selectedRooms);
   const navigate = useNavigate();
 
   const handleClick = async () => {
@@ -82,7 +85,7 @@ console.log(selectedRooms);
       const reservationData = { hotelId: id, rooms: selectedRooms, date: recievedDates };
       console.log(reservationData);
       const reservationDataStr = encodeURIComponent(JSON.stringify(reservationData));
-      navigate(`/BookingProcess/${reservationDataStr}`, { state:{ dates } })
+      navigate(`/BookingProcess/${reservationDataStr}`, { state: { dates } })
     } catch (err) { }
   };
   return (
