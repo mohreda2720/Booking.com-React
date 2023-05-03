@@ -97,7 +97,7 @@ const Reserve = ({ setOpen, hotelId }) => {
       const reservationData = { hotelId: id, rooms: selectedRooms, date: recievedDates };
       console.log(reservationData);
       const reservationDataStr = encodeURIComponent(JSON.stringify(reservationData));
-      navigate(`/payment/${reservationDataStr}`)
+      navigate(`/booking/${reservationDataStr}`)
     } catch (err) { }
   };
   return (
@@ -142,7 +142,7 @@ const Reserve = ({ setOpen, hotelId }) => {
         <button onClick={handleClick} className="rButton">
           Reserve Now!
         </button>
-        <Link to={`/Payment/${dates}/${selectedRooms}/${id}`}>Go to Payment</Link>
+        <Link to={`/booking/${dates}/${selectedRooms}/${id}`}>Go to Payment</Link>
       </div>
     </div>
   );

@@ -20,9 +20,14 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
-    dispatch(logoutUser());
-    navigate("/");
-  };
+    dispatch(logoutUser())
+      localStorage.removeItem('loggedUser');
+      localStorage.removeItem('token')
+      // Redirect to the login page
+      navigate('/');
+    }
+    
+
 
   return (
     <div className="navbarClass">

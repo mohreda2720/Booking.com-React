@@ -43,6 +43,19 @@ export function getAllUser() {
     }
 }
 
+
+// export function logoutUser() {
+
+//     return (dispatch) => {
+//         return axiosConfig.get(`/logout`).then((res) => {
+//             dispatch({ type: "LOGOUT_USER"})
+//         })
+//             .catch((err) => {
+//                 console.log(err);
+//             })
+//     }
+// }
+
 export function logoutUser() {
     return {
         type: "LOGOUT_USER",
