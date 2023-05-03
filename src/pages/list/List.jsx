@@ -16,8 +16,11 @@ import changeHeart from "../../store/actions/heartToggleAction";
 import sethotel from "../../store/actions/action";
 
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { useTranslation } from "react-i18next";
 
 const List = ({ hotel }) => {
+  const { t } = useTranslation();
+
   const likesEmoji = {
     liked: <AiFillHeart />,
     unliked: <AiOutlineHeart />,
@@ -45,7 +48,7 @@ const List = ({ hotel }) => {
     return diffDays;
   }
   const addFav = useSelector((state) => state.haertToggleReducer.favMovies);
- 
+
   const days = dayDifference(date[0].endDate, date[0].startDate);
 
   //
@@ -85,7 +88,7 @@ const List = ({ hotel }) => {
   };
   const filteredHotels = hotelsByCity.filter((hotel) => {
     const totalPrice = hotel.SSRoomPrice * days;
-    return totalPrice>= Min && totalPrice <= Max;
+    return totalPrice >= Min && totalPrice <= Max;
   });
 
   return (
@@ -95,13 +98,13 @@ const List = ({ hotel }) => {
       <div className="listContainer">
         <div className="listWrapper">
           <div className="listSearch">
-            <h1 className="lsTitle">Search</h1>
+            <h1 className="lsTitle">{t("Search")}</h1>
             <div className="">
-              <label>Destination</label>
+              <label>{t("Destination")}</label>
               <input placeholder={desnation} type="text" />
             </div>
             <div className="">
-              <label>Check-in Date</label>
+              <label>{t("Check-in Date")}</label>
               <span onClick={() => setOpenDate(!openDate)}>{`${format(
                 date[0].startDate,
                 "MM/dd/yyyy"
@@ -115,11 +118,11 @@ const List = ({ hotel }) => {
               )}
             </div>
             <div className="">
-              <label>Options</label>
+              <label>{t("Options")}</label>
               <div className="lsOptions">
                 <div className="lsOptionItem">
                   <span className="lsOptionText">
-                    Min price <small>per night</small>
+                    {t("Min price per night")}
                   </span>
                 </div>
                 <input
@@ -134,10 +137,12 @@ const List = ({ hotel }) => {
                   }}
                 />
 
-                <div>your min. price : {Min}</div>
+                <div>
+                  {t("your min. price")} : {Min}
+                </div>
                 <div className="lsOptionItem">
                   <span className="lsOptionText">
-                    Max price <small>per night</small>
+                    {t("Max price per night")}
                   </span>
                 </div>
                 <input
@@ -153,7 +158,7 @@ const List = ({ hotel }) => {
                 />
 
                 <div className="lsOptionItem">
-                  <span className="lsOptionText">Adult</span>
+                  <span className="lsOptionText">{t("Adult")}</span>
                 </div>
                 <input
                   style={{
@@ -167,7 +172,7 @@ const List = ({ hotel }) => {
                   placeholder={options.adult}
                 />
                 <div className="lsOptionItem">
-                  <span className="">Children</span>
+                  <span className="">{t("Children")}</span>
                 </div>
                 <input
                   style={{
@@ -181,7 +186,7 @@ const List = ({ hotel }) => {
                   placeholder={options.children}
                 />
                 <div className="lsOptionItem">
-                  <span className="lsOptionText">Room</span>
+                  <span className="lsOptionText">{t("Room")}</span>
                 </div>
                 <input
                   style={{
@@ -206,91 +211,13 @@ const List = ({ hotel }) => {
                 border: "none",
               }}
             >
-              Search
+              {t("Search")}
             </button>
           </div>
           <div className="listResult">
-            {filteredHotels.map(hotel => (<SearchItem hotel={hotel} key={hotel._id} />))} 
-            {/* {filteredHotels.map((hotel) => (
-              <div className="searchItem">
-                <Link
-                  to={`/hotels/${hotel._id}`}
-                  className="text-dark"
-                  style={{ textDecoration: "none" }}
-                >
-                  <img src={hotel.HotelImg} alt="" className="siImg" />
-                </Link>
-                <div className="siDesc">
-                  {/* <h1 className="siTitle">{hotel.name}</h1> */}
-                  {/* <h1 className="siTitle">
-                    {" "}
-                    <Link
-                      to={`/hotels/${hotel._id}`}
-                      className="text-dark"
-                      style={{ textDecoration: "none" }}
-                    >
-                      {hotel.name}
-                    </Link>
-                  </h1>
-                  <span className="siDistance"> day diff: {days}</span>
-                  <span className="siTaxiOp">Free airport taxi</span>
-                  <span className="siSubtitle">
-                    Studio Apartment with Air conditioning
-                  </span>
-                  <span className="siFeatures">
-                    Entire studio • 1 bathroom • 21m² 1 full bed
-                  </span>
-                  <span className="siCancelOp">Free cancellation </span>
-                  <span className="siCancelOpSubtitle">
-                    You can cancel later, so lock in this great price today!
-                  </span>
-                </div>
-                <div className="siDetails">
-                  <div className="siRating">
-                    <span>Excellent</span>
-                    <button
-                      style={{ backgroundColor: "#003580", color: "white" }}
-                    >
-                      8.9
-                    </button>
-                  </div>
-
-                  <div className="siDetailsTexts">
-                    <span className="siPrice">${hotel.SSRoomPrice * days}</span>
-                    <span className="siTaxOp">Includes taxes and fees</span> */}
-
-                    {/* <Link
-            to={`/hotels/${hotel._id}`}>
-          <button className="siCheckButton">See availability</button>
-          </Link> */}
-                    {/* <button
-                      onClick={handleSearch}
-                      className="siCheckButton"
-                      style={{
-                        background: "#003580",
-                        borderRadius: "6px",
-                        border: "none",
-                      }}
-                    >
-                      See availability
-                    </button>
-                    <br />
-                    <div>
-                      {favorites.includes(hotel._id) ? (
-                        <AiFillHeart
-                          onClick={(e) => addToFavourites(hotel._id, e)}
-                          style={{ color: "red" }}
-                        />
-                      ) : (
-                        <AiOutlineHeart
-                          onClick={(e) => addToFavourites(hotel._id, e)}
-                        />
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div> */}
-           
+            {filteredHotels.map((hotel) => (
+              <SearchItem hotel={hotel} key={hotel._id} />
+            ))}
           </div>
         </div>
       </div>

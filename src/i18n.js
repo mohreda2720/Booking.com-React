@@ -1,7 +1,7 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import en from './components/localheader/en.json';
-import ar from './components/localheader/ar.json';
+import en from './components/local/en.json';
+import ar from './components/local/ar.json';
 import languageDetector from 'i18next-browser-languagedetector';
 
 // the translations

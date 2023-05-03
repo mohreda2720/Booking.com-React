@@ -1,21 +1,25 @@
-import './propertyList.css';
-import { useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import axiosConfig from '../../axiosConfig/axiosConfig';
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import setcity from '../../store/actions/citiesAction';
+import "./propertyList.css";
+import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axiosConfig from "../../axiosConfig/axiosConfig";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import setcity from "../../store/actions/citiesAction";
+
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const PropertyList = () => {
+  const { t } = useTranslation();
   const location = useLocation();
   const [date, setDate] = useState([
     {
       startDate: new Date(),
       endDate: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
-      key: 'selection',
+      key: "selection",
     },
   ]);
-  const [cityId, setcitId] = useState('');
+  const [cityId, setcitId] = useState("");
   const [destination, setDestination] = useState(location.state?.destination);
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
@@ -29,17 +33,17 @@ const PropertyList = () => {
   const handleSearch = () => {
     console.log(destination);
 
-    navigate('/hotelsbycity', { state: { destination, date } });
+    navigate("/hotelsbycity", { state: { destination, date } });
   };
 
   const seachactivity = () => {
     return (
       axiosConfig.get(`/activities/searchcity/${cityId}`),
-      navigate('/activities')
+      navigate("/activities")
     );
   };
   const seachtours = () => {
-    return axiosConfig.get(`/tours/searchcity/${cityId}`), navigate('/tours');
+    return axiosConfig.get(`/tours/searchcity/${cityId}`), navigate("/tours");
   };
 
   return (
@@ -56,7 +60,6 @@ const PropertyList = () => {
                     src={city.CityImage}
                     alt=""
                   />
-
                   <div className="pListTitles">
                     <h1
                       onMouseOver={(e) => {
@@ -64,24 +67,27 @@ const PropertyList = () => {
                       }}
                       onClick={handleSearch}
                     >
-                      {city.CityName}
+                      {t("CityNameProp", {
+                        city: city.CityName,
+                        ARCityName: city.ARCityName,
+                      })}{" "}
                     </h1>
                     <h2>
-                      {' '}
+                      {" "}
                       <span
                         onMouseOver={(e) => {
                           setDestination(city.CityName), setcitId(city._id);
                         }}
                         onClick={handleSearch}
                       >
-                        hotels: {city.hotelsCount}{' '}
+                        hotels: {city.hotelsCount}{" "}
                       </span>
                       <span onClick={seachactivity}>
-                        | activities:
-                        {city.activitiesCount}{' '}
+                        |{" "}
+                        {t("activitiesCount", { count: city.activitiesCount })}{" "}
                       </span>
                       <span onClick={seachtours}>
-                        | tours: {city.toursCount}{' '}
+                        | tours: {city.toursCount}{" "}
                       </span>
                     </h2>
                   </div>

@@ -2,39 +2,41 @@ import {
   faBed,
   faCalendarDays,
   faCar,
+  faHeart,
   faPerson,
   faPlane,
   faTaxi,
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import './header.css';
-import { DateRange } from 'react-date-range';
-import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import 'react-date-range/dist/styles.css'; // main css file
-import 'react-date-range/dist/theme/default.css'; // theme css file
-import { format } from 'date-fns';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import changeHeart from '../../store/actions/heartToggleAction';
-import { useSelector } from 'react-redux';
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "./header.css";
+import { DateRange } from "react-date-range";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import "react-date-range/dist/styles.css"; // main css file
+import "react-date-range/dist/theme/default.css"; // theme css file
+import { format } from "date-fns";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import changeHeart from "../../store/actions/heartToggleAction";
+import { useSelector } from "react-redux";
+import { Navbar, Nav, NavDropdown, Badge } from "react-bootstrap";
 
 const Header = ({ type }) => {
   useEffect(() => {
     setRender((prev) => !prev);
   }, []);
 
-  const [destination, setDestination] = useState('');
+  const [destination, setDestination] = useState("");
   const [openDate, setOpenDate] = useState(false);
   const [render, setRender] = useState(false);
-  const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+  const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
   const [date, setDate] = useState([
     {
       startDate: new Date(),
       // endDate: (new Date()),
       endDate: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
-      key: 'selection',
+      key: "selection",
     },
   ]);
   // const favMovie = useSelector((state) => state.haertToggleReducer.favMovies);
@@ -53,21 +55,20 @@ const Header = ({ type }) => {
     setOptions((prev) => {
       return {
         ...prev,
-        [name]: operation === 'i' ? options[name] + 1 : options[name] - 1,
+        [name]: operation === "i" ? options[name] + 1 : options[name] - 1,
       };
     });
   };
 
   const handleSearch = () => {
-    navigate('/hotels', { state: { destination, date, options } });
+    navigate("/hotels", { state: { destination, date, options } });
   };
   const activities = () => {
-    navigate('/activities', { state: { destination, date, options } });
+    navigate("/activities", { state: { destination, date, options } });
   };
   const tours = () => {
-    navigate('/tours', { state: { destination, date, options } });
+    navigate("/tours", { state: { destination, date, options } });
   };
-  
 
   const changeLanguage = (language) => {
     i18n.changeLanguage(language);
@@ -77,64 +78,73 @@ const Header = ({ type }) => {
     <div className="header col-md-12">
       <div
         className={
-          type === 'list'
-            ? 'headerContainer mx-auto listMode'
-            : 'headerContainer mx-auto'
+          type === "list"
+            ? "headerContainer mx-auto listMode"
+            : "headerContainer mx-auto"
         }
       >
-        <div className="headerList">
-          <div className="headerListItem active">
-            <FontAwesomeIcon icon={faBed} />
+        <Navbar expand="sm">
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse>
+            <Nav className="mr-auto">
+              <Nav.Link href="#stays">
+                <FontAwesomeIcon icon={faBed} color="white" className="mr-2" />
+                <span className="text-white"> {t("Stays")} </span>
+              </Nav.Link>
 
-            <span>{t('Stays')}</span>
-          </div>
-          <div className="headerListItem">
-            <FontAwesomeIcon icon={faPlane} />
-            <span>{t('Flights')}</span>
-          </div>
-          <div className="headerListItem">
-            <FontAwesomeIcon icon={faCar} />
-            <span>{t('Car rentals')}</span>
-          </div>
-          <div className="headerListItem" onClick={activities}>
-            <FontAwesomeIcon icon={faBed} />
-            <span>{t('Activities')}</span>
-            {/* <span>{t('Attractions')}</span> */}
-           
-          </div>
-          <div className="headerListItem"onClick={tours}>
-            <FontAwesomeIcon icon={faTaxi} />
-              <span>{t('Tours')}</span>
-              {/* <span>{t('Airport taxis')}</span> */}
-          </div>
-          <Link to={`/MyWishList`}>
-            <button type="button" class="btn btn-primary position-relative">
-              Favorites
-              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              <Nav.Link href="#flights">
+                <FontAwesomeIcon
+                  icon={faPlane}
+                  color="white"
+                  className="mr-2"
+                />
+                <span className="text-white"> {t("Flights")} </span>
+              </Nav.Link>
+
+              <Nav.Link href="#car-rentals">
+                <FontAwesomeIcon icon={faCar} color="white" className="mr-2" />
+                <span className="text-white"> {t("Car rentals")} </span>
+              </Nav.Link>
+
+              <Nav.Link href="#attractions">
+                <FontAwesomeIcon icon={faBed} color="white" className="mr-2" />
+                <span className="text-white"> {t("Attractions")} </span>
+              </Nav.Link>
+
+              <Nav.Link href="#airport-taxis">
+                <FontAwesomeIcon icon={faTaxi} color="white" className="mr-2" />
+                <span className="text-white"> {t("Airport taxis")} </span>
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+          <Nav>
+            <Nav.Link as={Link} to={"/MyWishList"}>
+              <FontAwesomeIcon icon={faHeart} color="white" className="mr-2" />
+              <span className="text-white">{t("Favorites")}</span>
+              <Badge pill className="ml-2" style={{ backgroundColor: "red" }}>
                 {favorites.length}
-                <span class="visually-hidden">Favorites</span>
-              </span>
-            </button>
-          </Link>
-        </div>
-        {type !== 'list' && (
+              </Badge>
+            </Nav.Link>
+          </Nav>
+        </Navbar>
+        {type !== "list" && (
           <>
             <h1 className="headerTitle">
               {t("A lifetime of discounts? It's Genius.")}
             </h1>
             <p className="headerDesc">
               {t(
-                'Get rewarded for your travels – unlock instant savings of 10% or more with a free Lamabooking account'
+                "Get rewarded for your travels – unlock instant savings of 10% or more with a free booking account"
               )}
             </p>
-            <button className="headerBtn">{t('Sign in / Register')}</button>
+            <button className="headerBtn">{t("Sign in / Register")}</button>
             <div className="headerSearch">
               <div className="headerSearchItem">
                 <FontAwesomeIcon icon={faBed} className="headerIcon" />
 
                 <input
                   type="text"
-                  placeholder={t('Where are you going?')}
+                  placeholder={t("Where are you going?")}
                   className="headerSearchInput"
                   onChange={(e) => setDestination(e.target.value)}
                 />
@@ -145,9 +155,9 @@ const Header = ({ type }) => {
                 <span
                   onClick={() => setOpenDate(!openDate)}
                   className="headerSearchText"
-                >{`${format(date[0].startDate, 'MM/dd/yyyy')} to ${format(
+                >{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
                   date[0].endDate,
-                  'MM/dd/yyyy'
+                  "MM/dd/yyyy"
                 )}`}</span>
                 {openDate && (
                   <DateRange
@@ -165,18 +175,18 @@ const Header = ({ type }) => {
                 <span
                   onClick={() => setOpenOptions(!openOptions)}
                   className="headerSearchText"
-                >{`${options.adult} ${t('adult')} · ${options.children} ${t(
-                  'children'
-                )} · ${options.room} ${t('room')}`}</span>
+                >{`${options.adult} ${t("adult")} · ${options.children} ${t(
+                  "children"
+                )} · ${options.room} ${t("room")}`}</span>
                 {openOptions && (
                   <div className="options">
                     <div className="optionItem">
-                      <span className="optionText">{t('Adult')}</span>
+                      <span className="optionText">{t("Adult")}</span>
                       <div className="optionCounter">
                         <button
                           disabled={options.adult <= 1}
                           className="optionCounterButton"
-                          onClick={() => handleOption('adult', 'd')}
+                          onClick={() => handleOption("adult", "d")}
                         >
                           -
                         </button>
@@ -185,19 +195,19 @@ const Header = ({ type }) => {
                         </span>
                         <button
                           className="optionCounterButton"
-                          onClick={() => handleOption('adult', 'i')}
+                          onClick={() => handleOption("adult", "i")}
                         >
                           +
                         </button>
                       </div>
                     </div>
                     <div className="optionItem">
-                      <span className="optionText">{t('Children')}</span>
+                      <span className="optionText">{t("Children")}</span>
                       <div className="optionCounter">
                         <button
                           disabled={options.children <= 0}
                           className="optionCounterButton"
-                          onClick={() => handleOption('children', 'd')}
+                          onClick={() => handleOption("children", "d")}
                         >
                           -
                         </button>
@@ -206,19 +216,19 @@ const Header = ({ type }) => {
                         </span>
                         <button
                           className="optionCounterButton"
-                          onClick={() => handleOption('children', 'i')}
+                          onClick={() => handleOption("children", "i")}
                         >
                           +
                         </button>
                       </div>
                     </div>
                     <div className="optionItem">
-                      <span className="optionText">{t('Room')}</span>
+                      <span className="optionText">{t("Room")}</span>
                       <div className="optionCounter">
                         <button
                           disabled={options.room <= 1}
                           className="optionCounterButton"
-                          onClick={() => handleOption('room', 'd')}
+                          onClick={() => handleOption("room", "d")}
                         >
                           -
                         </button>
@@ -227,7 +237,7 @@ const Header = ({ type }) => {
                         </span>
                         <button
                           className="optionCounterButton"
-                          onClick={() => handleOption('room', 'i')}
+                          onClick={() => handleOption("room", "i")}
                         >
                           +
                         </button>
@@ -238,12 +248,10 @@ const Header = ({ type }) => {
               </div>
               <div className="headerSearchItem">
                 <button className="headerBtn" onClick={handleSearch}>
-                  {t('Search')}
+                  {t("Search")}
                 </button>
               </div>
             </div>
-            <button onClick={() => changeLanguage('ar')}>AR</button>
-            <button onClick={() => changeLanguage('en')}>EN</button>
           </>
         )}
       </div>
