@@ -2,6 +2,7 @@ import {
   faBed,
   faCalendarDays,
   faCar,
+  faHeart,
   faPerson,
   faPlane,
   faTaxi,
@@ -9,7 +10,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./header.css";
 import { DateRange } from "react-date-range";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
@@ -17,16 +18,14 @@ import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import changeHeart from "../../store/actions/heartToggleAction";
-import { useSelector, } from "react-redux";
+import { useSelector } from "react-redux";
+import { Navbar, Nav, NavDropdown, Badge } from "react-bootstrap";
 
 const Header = ({ type }) => {
-  
-
   useEffect(() => {
     setRender((prev) => !prev);
-  },[]);
-  
-  
+  }, []);
+
   const [destination, setDestination] = useState("");
   const [openDate, setOpenDate] = useState(false);
   const [render, setRender] = useState(false);
@@ -41,7 +40,7 @@ const Header = ({ type }) => {
     },
   ]);
   // const favMovie = useSelector((state) => state.haertToggleReducer.favMovies);
-  
+
   const [openOptions, setOpenOptions] = useState(false);
   const [options, setOptions] = useState({
     adult: 1,
@@ -78,39 +77,50 @@ const Header = ({ type }) => {
             : "headerContainer mx-auto"
         }
       >
-        <div className="headerList">
-          <div className="headerListItem active">
-            <FontAwesomeIcon icon={faBed} />
+        <Navbar expand="sm">
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse>
+            <Nav className="mr-auto">
+              <Nav.Link href="#stays">
+                <FontAwesomeIcon icon={faBed} color="white" className="mr-2" />
+                <span className="text-white"> {t("Stays")} </span>
+              </Nav.Link>
 
-           
-            <span>{t("Stays")}</span>
-          </div>
-          <div className="headerListItem">
-            <FontAwesomeIcon icon={faPlane} />
-            <span>{t("Flights")}</span>
-          </div>
-          <div className="headerListItem">
-            <FontAwesomeIcon icon={faCar} />
-            <span>{t("Car rentals")}</span>
-          </div>
-          <div className="headerListItem">
-            <FontAwesomeIcon icon={faBed} />
-            <span>{t("Attractions")}</span>
-          </div>
-          <div className="headerListItem">
-            <FontAwesomeIcon icon={faTaxi} />
-            <span>{t("Airport taxis")}</span>
-          </div>
-          <Link   to={`/MyWishList`}>
-         <button  type="button" class="btn btn-primary position-relative">
-         Favorites 
-  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-  {favorites.length } 
-    <span class="visually-hidden">Favorites</span>
-  </span>
-</button>
-</Link>
-        </div>
+              <Nav.Link href="#flights">
+                <FontAwesomeIcon
+                  icon={faPlane}
+                  color="white"
+                  className="mr-2"
+                />
+                <span className="text-white"> {t("Flights")} </span>
+              </Nav.Link>
+
+              <Nav.Link href="#car-rentals">
+                <FontAwesomeIcon icon={faCar} color="white" className="mr-2" />
+                <span className="text-white"> {t("Car rentals")} </span>
+              </Nav.Link>
+
+              <Nav.Link href="#attractions">
+                <FontAwesomeIcon icon={faBed} color="white" className="mr-2" />
+                <span className="text-white"> {t("Attractions")} </span>
+              </Nav.Link>
+
+              <Nav.Link href="#airport-taxis">
+                <FontAwesomeIcon icon={faTaxi} color="white" className="mr-2" />
+                <span className="text-white"> {t("Airport taxis")} </span>
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+          <Nav>
+            <Nav.Link as={Link} to={"/MyWishList"}>
+              <FontAwesomeIcon icon={faHeart} color="white" className="mr-2" />
+              <span className="text-white">{t("Favorites")}</span>
+              <Badge pill className="ml-2" style={{ backgroundColor: "red" }}>
+                {favorites.length}
+              </Badge>
+            </Nav.Link>
+          </Nav>
+        </Navbar>
         {type !== "list" && (
           <>
             <h1 className="headerTitle">
@@ -118,7 +128,7 @@ const Header = ({ type }) => {
             </h1>
             <p className="headerDesc">
               {t(
-                "Get rewarded for your travels – unlock instant savings of 10% or more with a free Lamabooking account"
+                "Get rewarded for your travels – unlock instant savings of 10% or more with a free booking account"
               )}
             </p>
             <button className="headerBtn">{t("Sign in / Register")}</button>
@@ -151,7 +161,6 @@ const Header = ({ type }) => {
                     ranges={date}
                     className="date"
                     minDate={new Date()}
-                   
                   />
                 )}
               </div>
@@ -237,8 +246,6 @@ const Header = ({ type }) => {
                 </button>
               </div>
             </div>
-            <button onClick={() => changeLanguage("ar")}>AR</button>
-            <button onClick={() => changeLanguage("en")}>EN</button>
           </>
         )}
       </div>
