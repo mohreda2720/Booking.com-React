@@ -10,7 +10,7 @@ import Hotelsbycity from "./pages/hotelsbycity/hotelsbycity"
 import Activities from "./pages/activities/activities";
 import Tours from "./pages/tours/tours";
 import Payment from './components/payment/Payment';
-import BookingProcess from './components/BookingProcess/BookingProcess';
+import BookingProcess from './components/bookingProcess/BookingProcess';
 
 
 function App() {
