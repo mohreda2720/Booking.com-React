@@ -11,7 +11,7 @@ import { isLoggedContext } from "../../contexts/isLogged";
 
 const LoginComponent = () => {
 
-  const { isLogged, setIsLogged } = useContext(isLoggedContext);
+  //const { isLogged, setIsLogged } = useContext(isLoggedContext);
   const dispatch = useDispatch();
 
   const [userData, setUserData] = useState({
@@ -58,7 +58,7 @@ const LoginComponent = () => {
     }
     alert("Login successful");
     dispatch(loginUser(userData, JSON.stringify(user)));
-    setIsLogged(true)
+    //setIsLogged(true)
     navigate("/");
   };
 

@@ -238,14 +238,14 @@ const Hotel = () => {
               </ul>
             </div>
             <div className="hotelDetailsPrice">
-              <h1>{t("Perfect for a 9-night stay!")}</h1>
+              <h1>{t("Perfect For Stay!")}</h1>
               <span>
                 {t(
                   "Located in the real heart of Krakow, this property has an excellent location score of 9.8!"
                 )}
               </span>
               <h2>
-                <b> ${hotelll.SSRoomPrice}</b> (9 nights)
+                <b> LE.{hotelll.SSRoomPrice}</b> (Your Choices)
               </h2>
               <button onClick={handleClick}>{t("Reserve or Book Now!")}</button>
             </div>

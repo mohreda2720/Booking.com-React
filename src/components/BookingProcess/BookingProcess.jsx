@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import SearchItem from "../searchItem/SearchItem";
 import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { faCircleCheck, faDollarSign } from "@fortawesome/free-solid-svg-icons";
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
 import Navbar from "../navbar/Navbar";
@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import axiosConfig from "../../axiosConfig/axiosConfig";
 import postReservation from "../../store/actions/reservation";
-
+import Payment from "../payment/Payment"
 
 const BookingProcess = () => {
   const [reservation, setReservation] = useState({
@@ -24,6 +24,7 @@ const BookingProcess = () => {
     checkOutDate: "",
     totalCost: "",
     customerName: "",
+    customerId: "",
     customerEmail: "",
     paymentStatus: "",
     paymentId: "",
@@ -203,13 +204,64 @@ const BookingProcess = () => {
                 <b style={{ marginLeft: "80px", color: "green" }}>
                   {" "}
                   EPG.{theHotel.SSRoomPrice * daysDif}
+
                 </b>
+
+              </div>
+              <div>
+                <br />
+                <FontAwesomeIcon style={{ marginRight: "5px" }} icon={faDollarSign} />
+                Includes EGP 613.74 in taxes and fees
+                10 % VAT
+
+                EGP 613.74
+
+                <FontAwesomeIcon style={{ marginRight: "5px" }} icon={faDollarSign} />  Excludes taxes and fees
+
+                City tax
+                This price is converted to show you the approximate cost in EGP. You'll pay in EGP.
               </div>
             </div>
-            <div className="card">Card 3</div>
+
           </div>
           <div className="col-8">
-            <div class="card">Card 1</div>
+            <div class=" searchItem">
+              {/* console.log(favMovie); */}
+
+
+              <img src={theHotel.HotelImg} alt="" className="siImg" />
+
+              <div className="siDesc">
+                <h1 className="siTitle">
+                  {" "}
+
+                  {theHotel.name}
+
+                </h1>
+                <span className="siDistance">"500m from center"</span>
+                <span className="siTaxiOp">"Free airport taxi"</span>
+                <span className="siSubtitle">
+                  Studio Apartment with Air conditioning
+                </span>
+                <span className="siFeatures">
+                  Entire studio • 1 bathroom • 21m² 1 full bed
+                </span>
+                <span className="siCancelOp"> Free cancellation</span>
+                <span className="siCancelOpSubtitle">
+                  You can cancel later, so lock in this great price today!
+                </span>
+              </div>
+              <div className="siDetails">
+
+                <div className="siDetailsTexts">
+                  <span className="siPrice">{theHotel.SSRoomPrice * daysDif}</span>
+                  <span className="siTaxOp">"Includes taxes and fees"</span>
+
+                  <br />
+
+                </div>
+              </div>
+            </div>
 
             <div class="card">
               <h5>Good to Know</h5>
@@ -250,7 +302,7 @@ const BookingProcess = () => {
             <div class="card ">
               <Form>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                  <Form.Label>Your Name </Form.Label>
+                  <Form.Label>Enter Your Name </Form.Label>
 
                   <Form.Control className="theformI" value={userData.userName} type="text" placeholder="Name" onChange={(e) =>
                     setUserData({ ...userData, userName: e.target.value })
@@ -261,30 +313,21 @@ const BookingProcess = () => {
                   <Form.Control className="theformI" value={userData.useremail} type="email" placeholder="name@example.com" onChange={(e) =>
                     setUserData({ ...userData, useremail: e.target.value })
                   } /> </Form.Group>
-                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                  <Form.Label>Example text area</Form.Label>
-                  <Form.Control className="theformI" as="textarea" rows={3} />
-                </Form.Group>
-                <Button onClick={handleClick} variant="primary" id="lButton">
-                  submit
-                </Button>
+
+
               </Form>
 
             </div>
-            <div class="card">Card 5</div>
-            <button></button>
-            <div class="card">Card 6</div>
-            <div class="card">Card 7</div>
-            <div class="card">Card 8</div>
-            <div class="card">Card 9</div>
-            <div class="card">Card 10</div>
-            <div class="card">Card 11</div>
-            <div class="card">Card 12</div>
-            <div class="card">Card 13</div>
-            <div class="card">Card 14</div>
-            <div class="card">Card 15</div>
-            <div class="card">Card 16</div>
+
+            <Button className="" style={{ marginBottom: "3%", float: "right" }} onClick={handleClick} variant="primary" id="lButton">
+              Go To Payment Step
+
+            </Button>
           </div>
+          <br />
+          <br />
+          <br />
+
         </div>
       </div>
     </>

@@ -133,7 +133,8 @@ const SearchItem = ({ hotel }) => {
                 style={{ color: "red" }}
               />
             ) : (
-              <AiOutlineHeart onClick={(e) => addToFavourites(hotel._id, e)} />
+              <AiOutlineHeart onClick={(e) => addToFavourites(hotel._id, e)} 
+            />
             )}
           </div>
         </div>

@@ -7,10 +7,11 @@ import { DropdownButton, Dropdown } from "react-bootstrap";
 import { BsGlobe } from "react-icons/bs";
 import { useState, useEffect, useContext } from "react";
 import { isLoggedContext } from "../../contexts/isLogged";
+import { Nav, NavDropdown, Badge } from "react-bootstrap";
 
 const Navbar = () => {
 
-  const { isLogged, setIsLogged } = useContext(isLoggedContext);
+  // const { isLogged, setIsLogged } = useContext(isLoggedContext);
 
   const { t, i18n } = useTranslation();
   if (i18n.dir(i18n.language) === "rtl") {
@@ -23,7 +24,7 @@ const Navbar = () => {
   // const currentUser = useSelector((state) => state.users.currentUser);
   const currentUser = JSON.parse(localStorage.getItem("loggedUser"));
 
- // const isLoggedIn = currentUser !== null;
+  // const isLoggedIn = currentUser !== null;
   const dispatch = useDispatch();
 
 
@@ -41,7 +42,7 @@ const Navbar = () => {
     dispatch(logoutUser())
     localStorage.removeItem('loggedUser');
     localStorage.removeItem('token')
-    setIsLogged(false)
+    //setIsLogged(false)
     // Redirect to the login page
     navigate('/');
   }
@@ -54,13 +55,24 @@ const Navbar = () => {
   return (
     <div className="navbarClass">
       <div className="navContainer">
-        <span className="logo" style={{ cursor: "pointer" }} onClick={home}>
-          BOOKING
-        </span>
-
+        <h3 className="logo" style={{ cursor: "pointer" }} onClick={home}>
+          Booking.com
+        </h3>
         <div className="navItems d-flex align-items-center">
-          {isLogged && currentUser ? (
+          {currentUser ? (
             <>
+              <Nav.Link href="/profile">
+
+                <img
+                  style={{ width: "50px", height: "50px" }}
+                  src={currentUser.userImg}
+                  alt=""
+                  class="rounded-circle"
+
+                />
+
+              </Nav.Link>
+
               <span className="welcomeMessage me-2">
                 Welcome, {currentUser.userName}!
               </span>
@@ -79,18 +91,19 @@ const Navbar = () => {
               <button className="navButton me-2" onClick={handleLoginClick}>
                 Login
               </button>
-              <div>
-                <DropdownButton id="language-selector" title={<BsGlobe />}>
-                  <Dropdown.Item onClick={() => changeLanguage("ar")}>
-                    AR
-                  </Dropdown.Item>
-                  <Dropdown.Item onClick={() => changeLanguage("en")}>
-                    EN
-                  </Dropdown.Item>
-                </DropdownButton>
-              </div>
+
             </>
           )}
+          <div className="ps-3">
+            <DropdownButton id="language-selector" title={<BsGlobe />}>
+              <Dropdown.Item onClick={() => changeLanguage("ar")}>
+                AR
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => changeLanguage("en")}>
+                EN
+              </Dropdown.Item>
+            </DropdownButton>
+          </div>
         </div>
       </div>
     </div>

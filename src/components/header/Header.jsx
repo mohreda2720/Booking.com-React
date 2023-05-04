@@ -6,6 +6,7 @@ import {
   faPerson,
   faPlane,
   faTaxi,
+  FaMoneyBillAlt
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./header.css";
@@ -92,7 +93,13 @@ const Header = ({ type }) => {
                 <span className="text-white"> {t("Stays")} </span>
               </Nav.Link>
 
-              <Nav.Link href="#flights">
+            
+              <Nav.Link href="#car-rentals">
+                <FontAwesomeIcon icon={faCar} color="white" className="mr-2" />
+                <span className="text-white"> {t("Car rentals")} </span>
+              </Nav.Link>
+              
+  <Nav.Link href="#flights">
                 <FontAwesomeIcon
                   icon={faPlane}
                   color="white"
@@ -101,20 +108,24 @@ const Header = ({ type }) => {
                 <span className="text-white"> {t("Flights")} </span>
               </Nav.Link>
 
-              <Nav.Link href="#car-rentals">
-                <FontAwesomeIcon icon={faCar} color="white" className="mr-2" />
-                <span className="text-white"> {t("Car rentals")} </span>
-              </Nav.Link>
+              <Nav.Link href="/activities">
 
-              <Nav.Link href="#attractions">
-                <FontAwesomeIcon icon={faBed} color="white" className="mr-2" />
-                <span className="text-white"> {t("Attractions")} </span>
-              </Nav.Link>
+<FontAwesomeIcon icon={faPlane} color="white" className="mr-2" />
 
-              <Nav.Link href="#airport-taxis">
-                <FontAwesomeIcon icon={faTaxi} color="white" className="mr-2" />
-                <span className="text-white"> {t("Airport taxis")} </span>
-              </Nav.Link>
+<span className="text-white mx-2"> {t("Activities")} </span>
+
+</Nav.Link>
+
+
+
+
+<Nav.Link href="/tours">
+
+<FontAwesomeIcon icon={faPlane} color="white" className="mr-2" />
+
+ <span className="text-white mx-2"> {t("Tours")} </span>
+
+ </Nav.Link>
             </Nav>
           </Navbar.Collapse>
           <Nav>

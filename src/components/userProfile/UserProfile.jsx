@@ -2,8 +2,11 @@ import "./userProfile.css"
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getReservationByUser } from "../../store/actions/reservation";
-import axiosConfig from "../../axiosConfig/axiosConfig"; 
-import Form from "react-bootstrap/Form"; 
+import { json, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import axiosConfig from "../../axiosConfig/axiosConfig";
+import Form from "react-bootstrap/Form";
 import Navbar from "../navbar/Navbar";
 
 
@@ -12,24 +15,15 @@ const UserProfile = () => {
     const dispatch = useDispatch();
     const currentUser = localStorage.getItem("loggedUser");
     const userObject = JSON.parse(currentUser);
-    const id = userObject._id
     console.log(userObject);
     const userEmail = userObject.userEmail;
     console.log(userEmail);
     const userName = userObject.userName;
+    const id = userObject._id;
     const userPhone = userObject.userPhone;
     const userImg = userObject.userImg;
-    console.log(id)
-
-    useEffect(() => {
-        dispatch(getReservationByUser(id))
-        console.log(data);
-    })
-
-
-
-    // useremail= userObject.userEmail; 
-    // userName=userObject.userName; 
+    // useremail= userObject.userEmail;
+    // userName=userObject.userName;
 
 
 
@@ -53,7 +47,10 @@ const UserProfile = () => {
 
                 axiosConfig.patch(`users/${id}`, userData)
 
+
             );
+
+
 
             navigate(`/profile`)
         } catch (err) { }
@@ -97,49 +94,53 @@ const UserProfile = () => {
 
                     <button class="btn bg-info" onClick={handleClick}>Edit </button>
                 </div>
-            </div>
-            {data.map((data) => (
+                {data.map((data) => (
 
-                <div class="card ">
-                    <div className="card">
-                        <h6>Your booking details</h6>
-                        <div className="row">
-                            <div className="col-6">
-                                Check-In
-                                <br />
-                                <b>
-                                    {data.checkInDate}
-                                </b>
-                                <br />
-                                From 2:00 PM
-                                <br />
-                                <br />
-                            </div>
+                    <div class="card ">
+                        <h6 style={{ color: "blue" }}>Your booking details</h6>
+                        <div className="card">
 
-                            <div className="col-6">
-                                {" "}
-                                Check-Out
-                                <br />
-                                <b>
-                                    {data.checkInDate}
-                                </b>
-                                <br />
-                                Until 2:00 PM
+                            <div className="row">
+                                <div className="col-2">
+                                    <img style={{ width: "100px", height: "100px" }} src={data.hotelData.HotelImg} alt="" className="siImg" />
+                                </div>
+                                <div className="col-6">
+                                    Check-In Date
+                                    <br />
+                                    <b>
+                                        {data.checkInDate}
+                                    </b>
+                                    <br />
+                                    From 2:00 PM
+                                    <br />
+                                    <br />
+                                </div>
+
+                                <div className="col-4 row">
+                                    {" "}
+                                    Check-Out Date
+                                    <br />
+                                    <b>
+                                        {data.checkOutDate}
+                                    </b>
+                                    <br />
+                                    Until 2:00 PM
+                                </div>
+                                <div style={{ width: "200px" }}>
+                                    <b> Payment Status:</b>
+                                    <p style={{ marginLeft: "5px", background: "yellow" }}>  {data.paymentStatus}</p>
+                                </div>
+                                <p> </p>
                             </div>
-                            <b>Total lenght of stay:</b>
-                            <p> Nights</p>
                         </div>
-                    </div>
 
 
-                    <div >
-                        date: {data.checkInDate}
+
 
                     </div>
+                ))}
+            </div>
 
-
-                </div>
-            ))}
         </>
     )
 }
