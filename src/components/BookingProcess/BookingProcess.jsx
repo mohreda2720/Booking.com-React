@@ -24,6 +24,7 @@ const BookingProcess = () => {
     checkOutDate: "",
     totalCost: "",
     customerName: "",
+    customerId: "",
     customerEmail: "",
     paymentStatus: "",
     paymentId: "",
@@ -71,7 +72,7 @@ const BookingProcess = () => {
 
   const currentUser = localStorage.getItem("loggedUser");
   const userObject = JSON.parse(currentUser);
-  console.log(userObject._id)
+  //console.log(userObject._id)
 
   // axiosConfig.get(`/users/${userId}`)
   // .then((response) => {
@@ -95,7 +96,7 @@ const BookingProcess = () => {
     userimage = userObject.userImg;
     userName = userObject.userName;
     userId = userObject._id;
-  }
+  } 
 
   const [userData, setUserData] = useState({
     useremail: useremail,
