@@ -62,7 +62,7 @@ const Hotel = () => {
 
   const currentUser = localStorage.getItem("loggedUser");
   const userObject = JSON.parse(currentUser);
-  console.log(userObject.isActive)
+
 
   const handleMove = (direction) => {
     let newSlideNumber;
@@ -79,11 +79,17 @@ const Hotel = () => {
   };
 
   const handleClick = () => {
-    if (userObject.isActive == !false) {
+    if (!userObject) {
       setOpenModal(true);
-    } else {
-      alert('Your account is not active')
     }
+    else {
+      if (userObject.isActive == false) {
+        alert('Your account is not active')
+      }else{
+        setOpenModal(true);
+      }
+    }
+
   };
 
   return (
