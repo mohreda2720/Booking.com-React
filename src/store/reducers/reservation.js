@@ -1,7 +1,7 @@
 const Initial_state = {
     allReservations: [],
     reservation: {},
-    allUserData:{},
+    allUserData:[{}],
 }
 
 export default function reservationReducer(state = Initial_state, action) {
