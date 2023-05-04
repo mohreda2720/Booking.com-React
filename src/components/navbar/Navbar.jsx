@@ -5,8 +5,13 @@ import { logoutUser } from "../../store/actions/loginRegister";
 import { useTranslation } from "react-i18next";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 import { BsGlobe } from "react-icons/bs";
+import { useState, useEffect, useContext } from "react";
+import { isLoggedContext } from "../../contexts/isLogged";
 
 const Navbar = () => {
+
+  const { isLogged, setIsLogged } = useContext(isLoggedContext);
+
   const { t, i18n } = useTranslation();
   if (i18n.dir(i18n.language) === "rtl") {
     document.getElementsByTagName("html")[0].setAttribute("dir", "rtl");
@@ -18,19 +23,29 @@ const Navbar = () => {
   // const currentUser = useSelector((state) => state.users.currentUser);
   const currentUser = JSON.parse(localStorage.getItem("loggedUser"));
 
-  const isLoggedIn = currentUser !== null;
+ // const isLoggedIn = currentUser !== null;
   const dispatch = useDispatch();
+
+
+  // useEffect(() => {
+  //   setRender((prev) => !prev);
+  // }, []);
+
+  // const handleRender = () => setRender((prev) => !prev);
+
+
 
   const handleRegisterClick = () => navigate("/register");
   const handleLoginClick = () => navigate("/login");
   const handleLogout = () => {
     dispatch(logoutUser())
-      localStorage.removeItem('loggedUser');
-      localStorage.removeItem('token')
-      // Redirect to the login page
-      navigate('/');
-    }
-  
+    localStorage.removeItem('loggedUser');
+    localStorage.removeItem('token')
+    setIsLogged(false)
+    // Redirect to the login page
+    navigate('/');
+  }
+
   const home = () => {
     navigate("/");
   };
@@ -42,8 +57,9 @@ const Navbar = () => {
         <span className="logo" style={{ cursor: "pointer" }} onClick={home}>
           BOOKING
         </span>
+
         <div className="navItems d-flex align-items-center">
-          {isLoggedIn ? (
+          {isLogged && currentUser ? (
             <>
               <span className="welcomeMessage me-2">
                 Welcome, {currentUser.userName}!

@@ -71,7 +71,7 @@ const BookingProcess = () => {
 
   const currentUser = localStorage.getItem("loggedUser");
   const userObject = JSON.parse(currentUser);
-  console.log(userObject._id)
+  // console.log(userObject._id)
 
   // axiosConfig.get(`/users/${userId}`)
   // .then((response) => {
@@ -88,7 +88,7 @@ const BookingProcess = () => {
   let useremail = "";
   let userimage = "";
   let userName = "";
-  let userId = "";
+  let userId = "undefined";
 
   if (currentUser) {
     useremail = userObject.userEmail;
@@ -143,10 +143,9 @@ const BookingProcess = () => {
         totalCost: totalCost,
         customerName: userData.userName,
         customerEmail: userData.useremail,
-        customerId: userObject._id,
-        //hotelName: { type: String, required: true },
-        //checkInDate: { type: Date, required: true },
-        //checkOutDate: { type: Date, required: true },
+        customerId: currentUser ? userObject._id : null,
+        checkInDate: REdates[0].startDate,
+        checkOutDate: REdates[0].endDate,
         //customerMobDile: { type: Number, required: true },
       };
       dispatch(postReservation(reservation));

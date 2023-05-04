@@ -125,8 +125,8 @@ const Hotel = () => {
           </div>
         )}
         <div className="hotelWrapper">
-          <button className="bookNow">{t("Reserve or Book Now!")}</button>
-          <button className="bookNow">{t("Reserve or Book Now!")}</button>
+          {/* <button className="bookNow">{t("Reserve or Book Now!")}</button>
+          <button className="bookNow">{t("Reserve or Book Now!")}</button> */}
           <h1 className="hotelTitle">
             {" "}
             {t("hotelllName", { name: hotelll.name })}
