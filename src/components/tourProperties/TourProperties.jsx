@@ -13,7 +13,7 @@ const TourProperties = () => {
   });
   return (
     <>
-      <div>this is the tours section</div>
+      <div></div>
       <div className="fp">
         {Tour.map(function (tour) {
           return (

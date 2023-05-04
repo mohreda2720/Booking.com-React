@@ -1,6 +1,7 @@
 const Initial_state = {
     allReservations: [],
     reservation: {},
+    allUserData:[{}],
 }
 
 export default function reservationReducer(state = Initial_state, action) {
@@ -9,6 +10,8 @@ export default function reservationReducer(state = Initial_state, action) {
             return { ...state, reservation: action.payload }
         case "GET_ALL_RESERVATION":
             return { ...state, allReservations: action.payload };
+        case "GET_RESERVATION_BY_USER":
+            return { ...state, allUserData: action.payload }
         default:
             return state
     }

@@ -49,9 +49,8 @@ const BookingProcess = () => {
 
   const bookingId = localStorage.getItem('reservId');
   const bookingCost = localStorage.getItem('totalPrice')
-  
-  const bookingDetails = { bookingId: bookingId, bookingCost: bookingCost };
 
+  const bookingDetails = { bookingId: bookingId, bookingCost: bookingCost };
   const bookingDetailsStr = encodeURIComponent(JSON.stringify(bookingDetails));
 
 
@@ -72,15 +71,30 @@ const BookingProcess = () => {
 
   const currentUser = localStorage.getItem("loggedUser");
   const userObject = JSON.parse(currentUser);
+  console.log(userObject._id)
+
+  // axiosConfig.get(`/users/${userId}`)
+  // .then((response) => {
+  //   const user = response.data;
+  //   console.log(user);
+  // })
+  // .catch((error) => {
+  //   console.error(error);
+  // });
+
+
+
 
   let useremail = "";
   let userimage = "";
   let userName = "";
+  let userId = "";
 
   if (currentUser) {
     useremail = userObject.userEmail;
     userimage = userObject.userImg;
     userName = userObject.userName;
+    userId = userObject._id;
   }
 
   const [userData, setUserData] = useState({
@@ -96,14 +110,22 @@ const BookingProcess = () => {
       dates.push(new Date(date).getTime());
       date.setDate(date.getDate() + 1);
     }
-
     return dates;
-
   };
 
   const alldates = getDatesInRange(REdates[0].startDate, REdates[0].endDate);
-
   const totalCost = theHotel.SSRoomPrice * daysDif;
+  
+  // const currentUser = localStorage.getItem("loggedUser");
+  // const userObject = JSON.parse(currentUser);
+
+  // .then(res => {
+  //   const user = res.data;
+  //   console.log(user);
+  // })
+  // .catch(error => {
+  //   console.log(error);
+  // });
 
 
   const handleClick = async () => {
@@ -121,10 +143,11 @@ const BookingProcess = () => {
         totalCost: totalCost,
         customerName: userData.userName,
         customerEmail: userData.useremail,
+        customerId: userObject._id,
         //hotelName: { type: String, required: true },
-        //checkInDate: { type: Date, required: true },
-        //checkOutDate: { type: Date, required: true },
-        //customerMobDile: { type: Number, required: true },
+        checkInDate: REdates[0].startDate,
+        checkOutDate: REdates[0].endDate,
+        // customerMobDile: { type: Number, required: true },
       };
       dispatch(postReservation(reservation));
       console.log(bookingDetails);
@@ -190,16 +213,16 @@ const BookingProcess = () => {
               <FontAwesomeIcon style={{marginRight:"5px"}} icon={faDollarSign} />  
          Includes EGP 613.74 in taxes and fees
 10 % VAT
-<br />
+
 EGP 613.74
-<br />
+
 <FontAwesomeIcon style={{marginRight:"5px"}} icon={faDollarSign} />  Excludes taxes and fees
-<br />
+
 City tax
 This price is converted to show you the approximate cost in EGP. You'll pay in EGP. 
               </div>
             </div>
-            <div className="card">Card 3</div>
+           
           </div>
           <div className="col-8">
             <div class=" searchItem"> 
@@ -292,15 +315,20 @@ This price is converted to show you the approximate cost in EGP. You'll pay in E
                     setUserData({ ...userData, useremail: e.target.value })
                   } /> </Form.Group>
                 
-                <Button onClick={handleClick} variant="primary" id="lButton">
-                  submit
-                </Button>
+              
               </Form>
-
+             
             </div>
-            <div class="card">Card 5</div>
-          <div> <Payment/></div> 
+       
+            <Button className="" style={{marginBottom:"3%" ,float:"right"}}  onClick={handleClick} variant="primary" id="lButton">
+                  Go To Payment Step
+                  
+                </Button>
           </div>
+          <br />
+          <br />
+          <br />
+          
         </div>
       </div>
     </>

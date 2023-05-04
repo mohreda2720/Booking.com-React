@@ -5,6 +5,7 @@ import { logoutUser } from "../../store/actions/loginRegister";
 import { useTranslation } from "react-i18next";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 import { BsGlobe } from "react-icons/bs";
+import {  Nav, NavDropdown, Badge } from "react-bootstrap";
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();
@@ -39,13 +40,25 @@ const Navbar = () => {
   return (
     <div className="navbarClass">
       <div className="navContainer">
-        <span className="logo" style={{ cursor: "pointer" }} onClick={home}>
-          BOOKING
-        </span>
+        <h3 className="logo" style={{ cursor: "pointer" }} onClick={home}>
+          Booking.com
+        </h3>
         <div className="navItems d-flex align-items-center">
           {isLoggedIn ? (
             <>
-              <span className="welcomeMessage me-2">
+ <Nav.Link href="/profile">
+
+ <img
+                  style={{ width: "50px", height: "50px" }}
+                  src={currentUser.userImg}
+                  alt=""
+                  class="rounded-circle"
+               
+                /> 
+
+</Nav.Link>
+
+              <span  className="welcomeMessage me-2">
                 Welcome, {currentUser.userName}!
               </span>
               {location.pathname !== "/login" &&

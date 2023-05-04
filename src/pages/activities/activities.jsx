@@ -34,9 +34,9 @@ const Activities = () => {
       <Header />
      
          
-            <div className='ms-5'>
+           
             <ActivityProperties />
-            </div>
+           
             </>
   )
 };

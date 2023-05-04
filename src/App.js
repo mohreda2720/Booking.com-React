@@ -10,9 +10,12 @@ import Hotelsbycity from "./pages/hotelsbycity/hotelsbycity"
 import Activities from "./pages/activities/activities";
 import Tours from "./pages/tours/tours";
 import Payment from './components/payment/Payment';
-import BookingProcess from './components/bookingProcess/BookingProcess';
 
+import BookingProcess from './components/BookingProcess/BookingProcess';
+import UserProfile from './components/userProfile/UserProfile';
 
+import NotFound from "./pages/notFound/NotFound.jsx";
+import ProtectedRoutes from './components/Guard/Guard'
 function App() {
   return (
 
@@ -30,7 +33,10 @@ function App() {
         <Route path="/BookingProcess/:reservationDataStr" element={<BookingProcess />}></Route>
         <Route path="/tours" element={<  Tours />}></Route>
         <Route path="/Payment" element={<  Payment />}></Route>
+        {/* <ProtectedRoutes path="/profile" element={<  UserProfile />}></ProtectedRoutes> */}
+        <Route path="/profile" element={<  ProtectedRoutes />}></Route>
 
+<Route path="/*" element={<NotFound/>}></Route>
       </Routes>
     </BrowserRouter>
 

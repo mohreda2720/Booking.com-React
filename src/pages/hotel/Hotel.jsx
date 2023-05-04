@@ -59,16 +59,11 @@ const Hotel = () => {
     setSlideNumber(i);
     setOpen(true);
   };
-  // const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
-  // function dayDifference(date1, date2) {
-  //   const timeDiff = Math.abs(date2.getTime() - date1.getTime());
-  //   const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
-  //   return diffDays;
-  // }
 
-  // const days = dayDifference(dates[0].endDate, dates[0].startDate);
-  // setDate([dates[0].endDate, dates[0].startDate])
-  // console.log(dates);
+  const currentUser = localStorage.getItem("loggedUser");
+  const userObject = JSON.parse(currentUser);
+
+
   const handleMove = (direction) => {
     let newSlideNumber;
 
@@ -82,9 +77,21 @@ const Hotel = () => {
 
     setSlideNumber(newSlideNumber);
   };
+
   const handleClick = () => {
-    setOpenModal(true);
+    if (!userObject) {
+      setOpenModal(true);
+    }
+    else {
+      if (userObject.isActive == false) {
+        alert('Your account is not active')
+      }else{
+        setOpenModal(true);
+      }
+    }
+
   };
+
   return (
     <div>
       <Navbar />

@@ -1,7 +1,17 @@
+
 import React, { useState } from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 import axiosConfig from "../../axiosConfig/axiosConfig";
 import { useParams } from 'react-router-dom';
+
+import "./payment.css";
+
+import Header from "../../components/header/Header";
+import Navbar from "./../../components/navbar/Navbar";
+
+import MailList from "./../../components/mailList/MailList";
+import Footer from "../../components/footer/Footer";
+
 
 
 const Payment = () => {
@@ -27,17 +37,36 @@ const Payment = () => {
 
   return (
     <div>
+
+      <Navbar></Navbar>
+      <Header type="list" />
+
+      <div className="mt-5 d-flex flex-column align-items-center gap-5">
+      <div className="centered-div">
       <StripeCheckout
         token={handleToken}
         stripeKey="pk_test_51N1oJNAB87pT1j76v4i0wDIhdsHyVzCkxlSwF4CcqbFA9MkLuIhHn76EU0GkDcnRPy1SlqmcaC9ztybp0zNste0700MKFBzuRL"
         amount={parseInt(bookingData.bookingCost) * 100}
       />
-      {paymentError && <p>Error: {paymentError}</p>}
+      </div>
+
+      <div >
+      {paymentError && <p className="centered-div card-error">Error: {paymentError}</p>}
+      </div>
+
+      <div >
       {paymentSuccess && (
-        <p>
+        <p className="centered-div card-id">
           Payment successful! Your booking ID is {paymentSuccess._id}.
         </p>
+      
       )}
+      </div>
+
+
+        <MailList />
+        <Footer />
+        </div>
     </div>
   );
 };

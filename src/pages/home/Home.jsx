@@ -31,7 +31,7 @@ Enjoy the freedom of a monthly stay on Booking.com</p>
       <div class="card-body">
         <h5 class="card-title">The great getaway, your way</h5>
         <p class="card-text">The great getaway, your way
-Save at least 15% on stays worldwide, from relaxing retreats to off-grid adventures</p>
+Save at least 15% </p>
         <a href="#" class="btn btn-primary">Find Getaway Deals</a>
       </div>
     </div>
@@ -39,7 +39,11 @@ Save at least 15% on stays worldwide, from relaxing retreats to off-grid adventu
 </div>
 <br></br>
 <br></br>
+</div>
+
+<PropertyList />
 {/* second part  */}
+<div class="myMainDiv" >
 <div class="row">
   <div class="col-sm-6 mb-3 mb-sm-0">
     <div class="card myDive myDive3">
@@ -145,9 +149,9 @@ Save at least 15% on stays worldwide, from relaxing retreats to off-grid adventu
 </div>
 
  
-        <Featured />
-        <h1 className="homeTitle">Browse by property type</h1>
-        <PropertyList />
+    
+        <h1 className="homeTitle"></h1>
+  
         <h1 className="homeTitle">Homes guests love</h1>
         <TourProperties />
         <MailList />
