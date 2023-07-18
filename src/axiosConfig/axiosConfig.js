@@ -4,7 +4,7 @@ import axios from 'axios'
 
 
 const axiosConfig = axios.create({
-    baseURL: "http://localhost:1724"
+    baseURL: "https://bookingclone-iti.onrender.com"
 });
 // axiosConfig.interceptors.request.use(
 //     function (config) {
