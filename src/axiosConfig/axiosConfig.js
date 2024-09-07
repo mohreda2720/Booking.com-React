@@ -4,7 +4,8 @@ import axios from 'axios'
 
 
 const axiosConfig = axios.create({
-    baseURL: "https://bookingclone-iti.onrender.com"
+    // baseURL: "https://bookingclone-iti.onrender.com"
+    baseURL: "https://booking-com-node.vercel.app"
 });
 // axiosConfig.interceptors.request.use(
 //     function (config) {
